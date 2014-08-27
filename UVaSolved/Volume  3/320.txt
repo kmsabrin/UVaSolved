@@ -1,0 +1,88 @@
+From apache@acm.uva.es Fri Apr  9 19:40:58 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i39HewW06235
+	for <judge@juez.localnet>; Fri, 9 Apr 2004 19:40:58 +0200
+Received: by acm.localnet (Postfix)
+	id 5899E1001E; Fri,  9 Apr 2004 19:40:58 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 55F6C10019; Fri,  9 Apr 2004 19:40:58 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 320
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040409174058.55F6C10019@acm.localnet>
+Date: Fri,  9 Apr 2004 19:40:58 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 320 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.90 - CRC: FE9D77BA **/
+/** Date: 2004-04-09 19:40:58 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+//#include<conio.h>
+#include<string.h>
+int main()
+{
+	char res[33][33];
+	char str[1000], tmp[33];
+	char c;
+	int i,j,k,p,q,x,y,fill,tcase;
+	//clrscr();
+	//freopen("always.in","r",stdin);
+	scanf("%d",&tcase);
+	getchar();
+	fill=1;
+	while(tcase)
+	{
+	scanf("%d %d",&x,&y);
+	getchar();
+	for(i=0;i<32;i++)
+		tmp[i] = '.';
+	tmp[i] = '\0';
+	for(j=0;j<32;j++)
+		strcpy(res[j],tmp);
+	gets(str);
+	for(i=0; str[i]; i++)
+	{
+		//printf("x=%d y=%d\t",x,y);
+		c=str[i];
+		if(c=='E')
+		{
+			//printf("%d fill at %d %d\n",fill++,x+1-1,y-1);
+			res[y-1][x+1-1] = 'X';
+			x++;
+		}
+		if(c=='W')
+		{
+			//printf("%d fill at %d %d\n",fill++,x-1,y+1-1);
+			res[y+1-1][x-1] = 'X';
+			x--;
+		}
+		if(c=='N')
+		{
+			//printf("%d fill at %d %d\n",fill++,x+1-1,y+1-1);
+			res[y+1-1][x+1-1] = 'X';
+			y++;
+		}
+		if(c=='S')
+		{
+			//printf("%d fill at %d %d\n",fill++,x-1,y-1);
+			res[y-1][x-1] = 'X';
+			y--;
+		}
+	}
+	printf("Bitmap #%d\n",fill);
+	for(i=31;i>=0;i--)
+		printf("%s\n",res[i]);
+	printf("\n");
+	fill++;
+	tcase--;
+	}
+	return 0;
+}
+
+
+
+@END_OF_SOURCE_CODE

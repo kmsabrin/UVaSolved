@@ -1,0 +1,46 @@
+From apache@acm.uva.es Fri Sep 26 18:11:49 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h8QGBnV30541
+	for <judge@juez.localnet>; Fri, 26 Sep 2003 18:11:49 +0200
+Received: by acm.localnet (Postfix)
+	id 20548104E1; Fri, 26 Sep 2003 18:11:49 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 1CA02104E2; Fri, 26 Sep 2003 18:11:49 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10035
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030926161149.1CA02104E2@acm.localnet>
+Date: Fri, 26 Sep 2003 18:11:49 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10035 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.80 - CRC: 42E0FCBE **/
+/** Date: 2003-09-26 18:11:49 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main()
+{
+	unsigned long a,b,c,d,j,k;
+	while(scanf("%lu %lu",&a,&b)&&a||b){
+	j=k=0;
+	while (a!=0||b!=0){
+		c=a%10;
+		d=b%10;
+		a=a/10;
+		b=b/10;
+		if ((c+d+j)>9){
+			k++;
+			j=1;
+			}
+		else j=0;
+		}
+	if(k==0)         	printf("No carry operation.\n");
+	else if (k==1)   	printf("1 carry operation.\n");
+	else             	printf("%lu carry operations.\n",k);
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

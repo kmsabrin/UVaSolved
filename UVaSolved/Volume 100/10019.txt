@@ -1,0 +1,67 @@
+From apache@acm.uva.es Mon Dec  1 04:59:34 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hB13xYW05204
+	for <judge@juez.localnet>; Mon, 1 Dec 2003 04:59:34 +0100
+Received: by acm.localnet (Postfix)
+	id C1882FF8E; Mon,  1 Dec 2003 04:59:34 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id BFE0BFF90; Mon,  1 Dec 2003 04:59:34 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10019
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031201035934.BFE0BFF90@acm.localnet>
+Date: Mon,  1 Dec 2003 04:59:34 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10019 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.29.245 - CRC: 871CF51F **/
+/** Date: 2003-12-01 04:59:34 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main()
+{
+	int i,j,k,c,d,e,f;
+
+   scanf("%d",&c);
+
+   while(c)
+   {
+   	scanf("%d",&i);
+      j=k=0;
+
+      d=i;
+      while(d)
+      {
+      	e=d%2;
+         if(e) j++;
+         d/=2;
+      }
+
+      d=i;
+      f=0;
+      while(d)
+      {
+      	e=d%10;
+         f=f*16+e;
+         d/=10;
+      }
+
+      d=f;
+      while(d)
+      {
+      	e=d%2;
+         if(e) k++;
+         d/=2;
+      }
+
+      printf("%d %d\n",j,k);
+      c--;
+   }
+   return 0;
+}
+
+      
+@END_OF_SOURCE_CODE

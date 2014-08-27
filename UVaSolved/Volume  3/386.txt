@@ -1,0 +1,51 @@
+From apache@acm.uva.es Wed Mar 17 16:32:04 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2HFW4W24813
+	for <judge@juez.localnet>; Wed, 17 Mar 2004 16:32:04 +0100
+Received: by acm.localnet (Postfix)
+	id C2AA710165; Wed, 17 Mar 2004 16:32:04 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id C04B210161; Wed, 17 Mar 2004 16:32:04 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 386
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040317153204.C04B210161@acm.localnet>
+Date: Wed, 17 Mar 2004 16:32:04 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 386 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.102 - CRC: 50C46701 **/
+/** Date: 2004-03-17 16:32:04 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main()
+{
+   long i,j,k,a,b,c,x,y,z;
+
+   for(a=2;a<=200;a++)
+   {
+      b=a*a*a;
+      for(i=2;i<a;i++)
+      {
+	x=i*i*i;
+	for(j=i+1; ;j++)
+	{
+		y=j*j*j;
+		if(x+y > b) break;
+		for(k=j+1;  ; k++)
+		{
+		    z=k*k*k;
+		    if(x+y+z > b) break;
+		    if(b==x+y+z)
+			printf("Cube = %ld, Triple = (%ld,%ld,%ld)\n",a,i,j,k);
+		}
+	 }
+      }
+   }
+   return 0;
+}
+
+@END_OF_SOURCE_CODE

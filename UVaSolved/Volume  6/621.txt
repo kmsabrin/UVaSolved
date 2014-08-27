@@ -1,0 +1,52 @@
+From apache@acm.uva.es Mon Dec  1 05:34:01 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hB14Y1W19085
+	for <judge@juez.localnet>; Mon, 1 Dec 2003 05:34:01 +0100
+Received: by acm.localnet (Postfix)
+	id 22C24FF8E; Mon,  1 Dec 2003 05:34:01 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 211E0FF90; Mon,  1 Dec 2003 05:34:01 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 621
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031201043401.211E0FF90@acm.localnet>
+Date: Mon,  1 Dec 2003 05:34:01 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 621 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.29.251 - CRC: ACA1677A **/
+/** Date: 2003-12-01 05:34:01 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int main()
+{
+	char a[100000],b[10000];
+   int i,j,k;
+   k=atoi(gets(b));
+   while(k)
+   {
+   	gets(a);
+      j=strlen(a);
+      i=atoi(a);
+      if(i==1||i==4||i==78)
+      	printf("+\n");
+      else if(a[j-1]=='5'&&a[j-2]=='3')
+      	printf("-\n");
+      else if(a[0]=='9'&&a[j-1]=='4')
+      	printf("*\n");
+      else if(a[0]=='1'&&a[1]=='9'&&a[2]=='0')
+      	printf("?\n");
+      else
+      	printf("+\n");
+      k--;
+   }
+   return 0;
+}
+
+@END_OF_SOURCE_CODE

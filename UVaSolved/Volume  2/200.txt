@@ -1,0 +1,65 @@
+From apache@acm.uva.es Sun Mar 20 15:59:16 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j2KExG413503
+	for <judge@juez.localnet>; Sun, 20 Mar 2005 15:59:16 +0100
+Received: by acm.localnet (Postfix)
+	id 1B5CD11326; Sun, 20 Mar 2005 16:00:42 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 1882FFF7C; Sun, 20 Mar 2005 16:00:42 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 200
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050320150042.1882FFF7C@acm.localnet>
+Date: Sun, 20 Mar 2005 16:00:42 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 200 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.34 - CRC: 88ADA1C7 **/
+/** Date: 2005-03-20 16:00:42 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+
+	char str[10001][23];
+	char letter[101];
+	char res[31];
+	int i, j, k = 0, n;
+	//freopen( "a.in", "r", stdin );
+
+	memset( letter, 0, sizeof( letter ) );
+	memset( str, 0, sizeof( str ) );
+	for ( i = 0; ; ++i )
+	{
+		gets( str[i] );
+		if ( str[i][0] == '#' )
+			break;
+	}
+	n = i;
+
+	for ( i = 0; i < 21; ++i )	
+		for ( j = 0; j < n; ++j )
+			if ( str[j][i] && !letter[str[j][i]] )
+			{
+				res[k++] = str[j][i];
+				letter[str[j][i]] = 1;
+			}
+	res[k] = 0;
+	
+
+	printf( "%s\n", res );
+	/*
+	while ( letter[s] )
+	{		
+		printf( "%c", letter[s] );
+		s = letter[s];
+	}
+	*/
+	return 0;
+}
+@END_OF_SOURCE_CODE

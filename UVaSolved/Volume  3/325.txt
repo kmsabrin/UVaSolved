@@ -1,0 +1,104 @@
+From apache@acm.uva.es Thu Oct  7 19:58:18 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i97HwIW04829
+	for <judge@juez.localnet>; Thu, 7 Oct 2004 19:58:18 +0200
+Received: by acm.localnet (Postfix)
+	id 641E410F03; Thu,  7 Oct 2004 19:58:18 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6178910EE7; Thu,  7 Oct 2004 19:58:18 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 325
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041007175818.6178910EE7@acm.localnet>
+Date: Thu,  7 Oct 2004 19:58:18 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 325 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.39 - CRC: 5CC2E37E **/
+/** Date: 2004-10-07 19:58:18 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+//#include<conio.h>
+
+int main()
+{
+	char a[10000];
+	int i, j, k, flg, m, n;
+//	freopen("a.in", "r", stdin); clrscr();
+
+	while ( gets(a) )
+	{
+		if ( a[0] == '*' ) break;
+
+		flg = 1;
+
+		for ( j = 0; a[j] == ' '; ++j );
+		for ( k = strlen(a) - 1; a[k] == ' '; --k );
+		for ( i = j; i <= k; ++i )
+			printf("%c", a[i]);
+
+
+
+		for ( i = j; i <= k; ++i )
+			if ( a[i] == ' ' )
+			{
+				flg = 0; break;
+			}
+
+		for ( i = j, m = 0; i <= k; ++i )
+			if ( a[i] == '.' || a[i] == 'e' || a[i] == 'E' )
+			{
+				m = 1; break;
+			}
+		if ( !m )  flg = 0;
+
+		for ( i = j; i <= k; ++i )
+			if ( a[i] == '.' )
+			{
+
+				if ( a[i - 1] < 48 || a[i - 1] > 57 ||
+					a[i + 1] < 48 || a[i + 1] > 57 )
+				flg = 0;
+				++i;
+				for ( ; i <=k; ++i )
+					if ( a[i] == '.' )
+					{
+						flg = 0; break;
+					}
+				break;
+			}
+
+		for ( i = j; i <= k; ++i )
+			if( a[i] == 'e' || a[i] == 'E' )
+			{
+
+				if ( a[i - 1] < 48 || a[i - 1] > 57 )
+					flg = 0;
+
+				if ( a[i + 1] == '+' || a[i + 1] == '-' )
+					i += 2;
+				else
+					i++;
+				if ( a[i] < 48 || a[i] > 57 )
+					flg = 0;
+				for (  ; i <= k; ++i )
+					if ( a[i] > 57 || a[i] < 48 )
+					{
+						flg = 0; break;
+					}
+				break;
+			}
+
+		if( !flg )
+			printf(" is illegal.\n");
+		else
+			printf(" is legal.\n");
+
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

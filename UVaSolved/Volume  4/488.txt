@@ -1,0 +1,63 @@
+From apache@acm.uva.es Thu Apr 15 18:00:04 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i3FG03W04487
+	for <judge@juez.localnet>; Thu, 15 Apr 2004 18:00:03 +0200
+Received: by acm.localnet (Postfix)
+	id 303D3FF7F; Thu, 15 Apr 2004 18:00:03 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 2E9C9FF7C; Thu, 15 Apr 2004 18:00:03 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 488
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040415160003.2E9C9FF7C@acm.localnet>
+Date: Thu, 15 Apr 2004 18:00:03 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 488 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.58 - CRC: 349BAB4D **/
+/** Date: 2004-04-15 18:00:03 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+
+int main()
+{
+int a,f,i,k,z,t,s;
+scanf("%d", &t);
+s=0;
+while(t)
+{
+scanf("%d %d", &a, &f);
+  for (z=1; z<=f; z++)
+  {
+  if(s == 1) printf("\n");
+		s=1;
+
+		for (i=1; i<=a; i++)
+				for (k=1; k<=i; k++)
+				{
+					if (k==i)
+						printf("%d\n",i);
+					else
+						printf("%d", i);
+				}
+		for (i=a-1; i>=1; i--)
+				for (k=i; k>=1; k--)
+				{
+					if (k==1)
+						printf("%d\n",i);
+					else
+						printf("%d", i);
+				}
+    //		if (z != f)
+    //				printf("\n");
+
+	}
+	t--;
+	}
+	return 0;
+	}
+
+@END_OF_SOURCE_CODE

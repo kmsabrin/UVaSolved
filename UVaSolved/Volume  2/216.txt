@@ -1,0 +1,110 @@
+From apache@acm.uva.es Mon Apr 12 12:48:48 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i3CAmmW22696
+	for <judge@juez.localnet>; Mon, 12 Apr 2004 12:48:48 +0200
+Received: by acm.localnet (Postfix)
+	id 283EE109F6; Mon, 12 Apr 2004 12:48:48 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 26AB4109F5; Mon, 12 Apr 2004 12:48:48 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 216
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040412104848.26AB4109F5@acm.localnet>
+Date: Mon, 12 Apr 2004 12:48:48 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 216 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.68 - CRC: D3B452BF **/
+/** Date: 2004-04-12 12:48:48 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <math.h>
+//#include <conio.h>
+
+float distance[8][8];
+int x_val[8];
+int y_val[8];
+int path[8];
+int check[8];
+int wanted[8];
+int index, nodes;
+float min_distance, current_distance;
+
+int call(int start)
+{
+	int i;
+	int h1;
+	float h2;
+	if((index == nodes) && min_distance > current_distance)
+	{
+		min_distance = current_distance;
+		for(i=0; i<nodes; i++)
+			wanted[i] = path[i];
+		return 0;
+	}
+	h1 = index;
+	h2 = current_distance;
+	for(i=0; i<nodes; i++)
+	{
+		if(check[i] == 0)
+		{
+			current_distance += distance[start][i];
+			if(current_distance >= min_distance) { current_distance = h2; continue;}
+			check[i] = 1;
+			path[index++] = i;
+			call(i);
+			index = h1;
+			check[i] = 0;
+			current_distance = h2;
+		}
+	}
+	return 0;
+}
+
+
+
+int main()
+{
+	int i, j, net = 1;;
+  //	freopen("always.in","r",stdin);
+  //	clrscr();
+	while(scanf("%d", &nodes) && nodes)
+	{
+	for(i=0; i<nodes; i++)
+		scanf("%d %d", &x_val[i], &y_val[i]);
+	for(i=0; i<nodes; i++)
+	{
+		for(j=0; j<nodes; j++)
+		{
+			if(i != j)
+			{
+			distance[i][j] = sqrt((x_val[i] - x_val[j]) *  (x_val[i] - x_val[j]) + (y_val[i] - y_val[j]) * (y_val[i] - y_val[j])) + 16;
+			}
+		     //	printf("%.2f ",distance[i][j]);
+
+		}
+		//printf("\n\n");
+	}
+	min_distance = 50000;
+
+	for(i=0; i<nodes; i++)
+	{
+		index = 0;
+		for(j=0; j<nodes; j++) path[j] = check[j] = 0;
+		check[i] = 1;
+		path[index++] = i;
+		call(i);
+	}
+	printf("**********************************************************\n");
+	printf("Network #%d\n",net++);
+	for(i=0; i<nodes-1; i++)
+		printf("Cable requirement to connect (%d,%d) to (%d,%d) is %.2f feet.\n",x_val[wanted[i]],y_val[wanted[i]],x_val[wanted[i+1]],y_val[wanted[i+1]],distance[wanted[i]][wanted[i+1]]);
+	printf("Number of feet of cable required is %.2f.\n",min_distance);
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

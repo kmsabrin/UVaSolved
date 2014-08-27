@@ -1,0 +1,75 @@
+From apache@acm.uva.es Thu Feb 26 16:39:39 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i1QFddW05401
+	for <judge@juez.localnet>; Thu, 26 Feb 2004 16:39:39 +0100
+Received: by acm.localnet (Postfix)
+	id 414CDFFEF; Thu, 26 Feb 2004 16:39:39 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 3F503FFE8; Thu, 26 Feb 2004 16:39:39 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 146
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040226153939.3F503FFE8@acm.localnet>
+Date: Thu, 26 Feb 2004 16:39:39 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 146 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.43 - CRC: 7B52A9A2 **/
+/** Date: 2004-02-26 16:39:39 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+
+int main(){
+	char a[55],t;
+	int n,j,k,r,s,f;
+
+	while (gets(a))
+	{
+		if (a[0] == '#')
+			break;
+
+		n = strlen(a) - 1;
+		for (j = f = 0; j < n; j++)
+			if ( a[j] < a[j+1]) {
+				f = 1;
+				break;
+			}
+
+		if (!f)
+			printf("No Successor\n");
+		else
+		{
+			j = n - 1;
+			while (a[j] >= a[j+1])
+			j--;
+
+			k = n;
+			while (a[j] >= a[k])
+			k--;
+
+			t = a[j];
+			a[j] = a[k];
+			a[k] = t;
+
+			r = n;
+			s = j + 1;
+			while (r > s)
+			{
+				t = a[r];
+				a[r] = a[s];
+				a[s] = t;
+
+				r--;
+				s++;
+			}
+
+			printf("%s\n",a);
+		}
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

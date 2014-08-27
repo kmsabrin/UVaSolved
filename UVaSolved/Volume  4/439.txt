@@ -1,0 +1,87 @@
+From apache@acm.uva.es Fri Apr  9 03:53:09 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i391r9W02650
+	for <judge@juez.localnet>; Fri, 9 Apr 2004 03:53:09 +0200
+Received: by acm.localnet (Postfix)
+	id 35D8BFF84; Fri,  9 Apr 2004 03:53:09 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 33A1AFF80; Fri,  9 Apr 2004 03:53:09 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 439
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040409015309.33A1AFF80@acm.localnet>
+Date: Fri,  9 Apr 2004 03:53:09 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 439 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.40 - CRC: 4AE4199F **/
+/** Date: 2004-04-09 03:53:09 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+//#include <conio.h>
+//#include <time.h>
+
+int m_c[9][9];
+int count, min;
+int dx, dy;
+
+int call(int r, int c)
+{
+	if( r < 1 || r > 8 || c < 1 || c > 8 )   return 0;
+	if( m_c[r][c] && count >= m_c[r][c] )  return 0;
+	if( count > min ) return 0;
+	if( r == dx && c == dy )
+	{
+		if( count < min )
+			min = count;
+		return 0;
+	}
+	m_c[r][c] = count;
+	count++;
+	call(r+1,c-2);
+	call(r-1,c-2);
+	call(r+1,c+2);
+	call(r-1,c+2);
+	call(r-2,c+1);
+	call(r-2,c-1);
+	call(r+2,c+1);
+	call(r+2,c-1);
+	count--;
+	return 0;
+}
+
+void init()
+{
+	int i, j;
+	for(i = 0; i < 9; i++)
+		for(j = 0; j < 9; j++)
+			m_c[i][j] = 0;
+
+	min = 9;
+	count =  0;
+}
+
+int main()
+{
+	int r, c;
+	char str[6];
+	//float x,y; x= clock(); clrscr();
+	//freopen( "always.in", "r", stdin);
+	//freopen( "output.out", "w", stdout);
+	while( gets( str ) )
+	{
+		c  = str[0] - 96;
+		r  = str[1] - 48;
+		dy = str[3] - 96;
+		dx = str[4] - 48;
+		init();
+		call(r, c);
+		printf("To get from %c%c to %c%c takes %d knight moves.\n",str[0],str[1],str[3],str[4],min);
+	}
+	//y = clock(); printf("%f seconds\n",(y-x)/CLK_TCK);
+	return 0;
+}
+@END_OF_SOURCE_CODE

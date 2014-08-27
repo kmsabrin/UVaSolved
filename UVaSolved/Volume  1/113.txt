@@ -1,0 +1,39 @@
+From apache@acm.uva.es Thu Aug 14 16:33:47 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h7EEXlV21490
+	for <judge@juez.localnet>; Thu, 14 Aug 2003 16:33:47 +0200
+Received: by acm.localnet (Postfix)
+	id A4489FF65; Thu, 14 Aug 2003 16:33:47 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id A25E61008B; Thu, 14 Aug 2003 16:33:47 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 113
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030814143347.A25E61008B@acm.localnet>
+Date: Thu, 14 Aug 2003 16:33:47 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 113 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.76 - CRC: 5AC81D1D **/
+/** Date: 2003-08-14 16:33:47 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+/* @JUDGE_ID 113 C++ */
+
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+ double a,b;
+
+ while(scanf("%lf %lf",&a,&b)!=EOF){
+ printf("%.0lf\n",pow(b,1/a));
+ }
+ return 0;
+}
+
+
+@END_OF_SOURCE_CODE

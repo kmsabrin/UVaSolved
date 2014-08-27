@@ -1,0 +1,63 @@
+From apache@acm.uva.es Thu Feb 19 13:18:52 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i1JCIqW27188
+	for <judge@juez.localnet>; Thu, 19 Feb 2004 13:18:52 +0100
+Received: by acm.localnet (Postfix)
+	id A0837FFF2; Thu, 19 Feb 2004 13:18:52 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 9E918FFBD; Thu, 19 Feb 2004 13:18:52 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 190
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040219121852.9E918FFBD@acm.localnet>
+Date: Thu, 19 Feb 2004 13:18:52 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 190 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.26.241 - CRC: 73A64F11 **/
+/** Date: 2004-02-19 13:18:52 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+
+int main(void)
+{
+	char c1, c2, c3;
+	double x1,x2,x3,y1,y2,y3, k1, k2, k, c, d, h, r;
+
+	while((scanf("%lf %lf %lf %lf %lf %lf", &x1, &y1, &x2, &y2, &x3, &y3)) != EOF) {
+		k1 = -(x1*x1 + y1*y1 - x2*x2 - y2*y2)/2;
+		k2 = -(x2*x2 + y2*y2 - x3*x3 - y3*y3)/2;
+		d = (x1-x2)*(y2-y3) - (x2-x3)*(y1-y2);
+		h = ((y1-y2)*k2 - (y2-y3)*k1)/d;
+		k = ((x2-x3)*k1 - (x1-x2)*k2)/d;
+		r = sqrt((x1-h)*(x1-h) + (y1-k)*(y1-k));
+		c = h*h + k*k - r*r;
+
+		if(h<0) {
+			c1 = '+';
+			h = -h;
+		}
+		else
+			c1 = '-';
+		if(k<0) {
+			 c2 = '+';
+			 k = -k;
+		}
+		else
+			c2 = '-';
+		printf("(x %c %.3lf)^2 + (y %c %.3lf)^2 = %.3lf^2\n", c1, h, c2, k, r);
+		if(c<0) {
+			c3 = '-';
+			c = -c;
+		}
+		else c3 = '+';
+		printf("x^2 + y^2 %c %.3lfx %c %.3lfy %c %.3lf = 0\n\n", c1, 2*h, c2, 2*k, c3, c);
+	}
+
+	return 0;
+}
+@END_OF_SOURCE_CODE

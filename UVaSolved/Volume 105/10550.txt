@@ -1,0 +1,56 @@
+From apache@acm.uva.es Wed Mar 10 18:00:34 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2AH0XW30948
+	for <judge@juez.localnet>; Wed, 10 Mar 2004 18:00:33 +0100
+Received: by acm.localnet (Postfix)
+	id 6D8B410002; Wed, 10 Mar 2004 18:00:33 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6B688FFFF; Wed, 10 Mar 2004 18:00:33 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10550
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040310170033.6B688FFFF@acm.localnet>
+Date: Wed, 10 Mar 2004 18:00:33 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10550 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.105 - CRC: 2F1A6905 **/
+/** Date: 2004-03-10 18:00:33 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main()
+{
+	int s, a, b, c, deg;
+
+	while(scanf("%d %d %d %d",&s,&a,&b,&c))
+	{
+	if(!s && !a && !b && !c) break;
+
+	deg=1080;
+
+	if(s >= a)
+		deg += (s-a)*9;
+	else
+		deg += 360 - ((a-s)*9);
+
+	if(a < b)
+		deg += (b-a)*9;
+	else
+		deg += 360 - (a-b)*9;
+
+	if(b >= c)
+		deg += (b-c)*9;
+	else
+		deg += 360 - ((c-b)*9);
+
+	printf("%d\n",deg);
+	}
+
+	return 0;
+}
+
+
+@END_OF_SOURCE_CODE

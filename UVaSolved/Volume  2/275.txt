@@ -1,0 +1,99 @@
+From apache@acm.uva.es Mon Oct 18 11:32:02 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i9I9W2W15697
+	for <judge@juez.localnet>; Mon, 18 Oct 2004 11:32:02 +0200
+Received: by acm.localnet (Postfix)
+	id 4214010E5B; Mon, 18 Oct 2004 11:32:16 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 4095510E46; Mon, 18 Oct 2004 11:32:16 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 275
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041018093216.4095510E46@acm.localnet>
+Date: Mon, 18 Oct 2004 11:32:16 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 275 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.51 - CRC: 8B147637 **/
+/** Date: 2004-10-18 11:32:16 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+//#include<conio.h>
+
+int main()
+{
+	int a,b,c,d[10010],i,j,k,r;
+//	clrscr();
+//	freopen("f.in", "r", stdin);
+//	freopen("b.out", "w", stdout);
+
+	while(scanf("%d %d",&a,&b))
+	{
+		if( !a && !b )
+			break;
+
+		if( !a && b ) {
+			printf(".0");
+			printf("\nThis expansion terminates.\n\n");
+			continue;
+		}
+
+		for(i = 0; i< 10010; i++)
+			d[i] = 0;
+		printf(".");
+		j = 0;
+		d[a] = ++j;
+
+		while( 1 )
+		{
+			r = 1;
+			while( 1 )
+			{
+				a *= 10;
+				if ( a >= b ) break;
+				if( !( j % 50 ) ) printf("\n");
+				printf("0");
+				if( d[a] )
+				{
+					c = 1;
+					k = j - d[a] + 1;
+					r = 0;
+					break;
+				}
+				d[a] = ++j;
+			}
+			if(!r) break;
+			if ( !( j % 50 ) )  printf("\n");
+			printf("%d", a / b);
+
+			a %= b;
+
+			if ( !a )
+			{
+				c = 0;
+				break;
+			}
+
+			if( !d[a] )
+				d[a] = ++j;
+			else
+			{
+				c = 1;
+				k = j - d[a] + 1;
+				break;
+			}
+
+		}
+
+		if( c )
+			printf("\nThe last %d digits repeat forever.\n",k);
+		else
+			printf("\nThis expansion terminates.\n");
+		printf("\n");
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

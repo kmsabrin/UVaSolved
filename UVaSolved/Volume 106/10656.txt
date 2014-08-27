@@ -1,0 +1,45 @@
+From apache@acm.uva.es Sun Sep 19 03:38:34 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8J1cXW07585
+	for <judge@juez.localnet>; Sun, 19 Sep 2004 03:38:33 +0200
+Received: by acm.localnet (Postfix)
+	id A939D10F9C; Sun, 19 Sep 2004 03:38:33 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id A732410F98; Sun, 19 Sep 2004 03:38:33 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10656
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040919013833.A732410F98@acm.localnet>
+Date: Sun, 19 Sep 2004 03:38:33 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10656 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.106 - CRC: A6300E65 **/
+/** Date: 2004-09-19 03:38:33 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main()
+{
+	int n,m,f;
+	while(scanf("%d", &n) && n)
+	{
+		f = 0;
+		while(n--)
+		{
+			scanf("%d", &m);
+			if(m) {
+				if(f == 0) printf("%d",m);
+				if(f == 1) printf(" %d",m);
+				f = 1;
+			}
+		}
+		if(f == 0) printf("0");
+		printf("\n");
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

@@ -1,0 +1,51 @@
+From apache@acm.uva.es Wed Jan  5 17:04:14 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j05G4E301259
+	for <judge@juez.localnet>; Wed, 5 Jan 2005 17:04:14 +0100
+Received: by acm.localnet (Postfix)
+	id 63013111E9; Wed,  5 Jan 2005 17:04:14 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 60554107C1; Wed,  5 Jan 2005 17:04:14 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 640
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050105160414.60554107C1@acm.localnet>
+Date: Wed,  5 Jan 2005 17:04:14 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 640 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.113 - CRC: A0F80F28 **/
+/** Date: 2005-01-05 17:04:14 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+char p[1000001];
+
+int main()
+{
+	int i, j, k;
+	for ( i = 1; i < 1000001; ++i )
+		if ( !p[i] )
+		{
+			printf( "%d\n", i );
+			j = k = i;
+			while ( 1 )
+			{
+				while( k )
+				{
+					j += k % 10;
+					k /= 10;
+				}
+				if ( j > 1000000 ) break;
+				if ( p[j] ) break;
+				p[j] = 1;
+				k = j; 
+			}
+		}
+									
+	return 0;
+}
+@END_OF_SOURCE_CODE

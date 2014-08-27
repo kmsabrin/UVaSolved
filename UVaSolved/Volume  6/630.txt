@@ -1,0 +1,80 @@
+From apache@acm.uva.es Tue Nov 30 18:58:33 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id iAUHwVp18273
+	for <judge@juez.localnet>; Tue, 30 Nov 2004 18:58:31 +0100
+Received: by acm.localnet (Postfix)
+	id 27AE4102B1; Tue, 30 Nov 2004 18:58:32 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 259E21027D; Tue, 30 Nov 2004 18:58:32 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 630
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041130175832.259E21027D@acm.localnet>
+Date: Tue, 30 Nov 2004 18:58:32 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 630 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.51 - CRC: B7EB187 **/
+/** Date: 2004-11-30 18:58:32 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
+//#include<conio.h>
+
+
+int main()
+{
+	char strs[1010][30], tmp[30];
+	int count[1010][125], t[125];
+	int i, j, k, p, f, tc;
+//	clrscr();
+//	freopen( "a.in", "r", stdin );
+	scanf( "%d", &tc ); getchar(); getchar();
+	while( tc-- )
+	{
+	memset( count, 0, 1010 * 125 * sizeof(int) );
+	i = 0;
+	p = atoi( gets( tmp ) );
+	while( p-- )
+	{
+		gets( tmp );
+		strcpy( strs[i], tmp );
+		for ( k = 0; tmp[k]; ++k )
+			count[i][tmp[k]]++;
+		++i;
+	}
+
+	while ( gets( tmp ) )
+	{
+		if ( !strcmp( "END", tmp ) )
+			break;
+		memset( t, 0, 125 * sizeof(int) );
+		for ( j = 0; tmp[j]; ++j )
+			t[tmp[j]]++;
+
+		k = 1;
+		printf( "Anagrams for: %s\n", tmp );
+		for ( j = 0; j < i; ++j )
+		{
+			for ( p = 0, f = 1; p < 125; ++p )
+				if ( count[j][p] != t[p] )
+				{
+					f = 0;
+					break;
+				}
+			if ( f )
+			printf( "%3d) %s\n", k++, strs[j] );
+		}
+		if ( k == 1 )
+			printf( "No anagrams for: %s\n", tmp );
+	}
+	if( tc )  { printf("\n"); getchar(); }
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

@@ -1,0 +1,58 @@
+From apache@acm.uva.es Fri Oct 17 16:07:26 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE7QV00399
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:07:26 +0200
+Received: by acm.localnet (Postfix)
+	id 8BF05FF6A; Fri, 17 Oct 2003 16:07:26 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 8A067FF7E; Fri, 17 Oct 2003 16:07:26 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 686
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140726.8A067FF7E@acm.localnet>
+Date: Fri, 17 Oct 2003 16:07:26 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 686 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.85 - CRC: B3982AAF **/
+/** Date: 2003-10-17 16:07:26 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+
+int prime(double c){
+	long a,b,i;
+	b=sqrt(c);
+	for(i=1,a=3;a<=b;a+=2){
+		if(!fmod(c,a)) {i=0; break;}
+		else i=1;
+		}
+	return i;
+}
+
+int main(){
+	long i,j,d,k,a,b[4000];
+
+	for(b[0]=2,i=1,j=3;j<=32768;j+=2)
+	   if(prime(j))  b[i++]=j;
+
+	while(scanf("%ld",&d)&&d){
+	   for(k=a=0;b[k]<=d/2;k++)
+		for(j=i-1;b[k]+b[j]>=d;j--)
+		   if(b[k]+b[j]==d)
+			a++;
+	   printf("%ld\n",a);
+	   }
+
+	return 0;
+}
+
+
+
+
+
+
+@END_OF_SOURCE_CODE

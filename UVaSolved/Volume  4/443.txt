@@ -1,0 +1,56 @@
+/* @JUDGE_ID: 34556CP 443 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.33 - CRC: A9B949FD **/
+/** Date: 2005-01-03 18:13:03 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<stdlib.h>
+
+#define Limit 2000000000
+
+int  arr[6000];
+int index;
+char str[][3] = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
+
+int comp( const void *i, const void *j )
+{
+	return *(int *)i - *(int *)j;
+}
+
+void call( int x, int y )
+{
+	if ( x > Limit ) return;
+
+	arr[index++] = x;
+
+	if ( y <= 2 && x <= ( Limit / 2 ) )  call( x * 2, 2 );
+	if ( y <= 3 && x <= ( Limit / 3 ) )  call( x * 3, 3 );
+	if ( y <= 5 && x <= ( Limit / 5 ) )  call( x * 5, 5 );
+	if ( y <= 7 && x <= ( Limit / 7 ) )  call( x * 7, 7 );
+
+}
+
+
+int main()
+{
+	int i, j, k;
+	
+
+	call( 1, 1 );
+
+	qsort( arr, index, sizeof(int), comp );
+
+	while( scanf( "%d", &i ) && i )
+	{
+		printf( "The %d", i );
+		j = arr[i - 1];
+		if ( i % 100 == 11 || i % 100 == 12 || i % 100 == 13 ) k = 0;
+		else	k = i % 10;
+		printf( "%s", str[k] );
+		printf( " humble number is %d.\n", j );
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

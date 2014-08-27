@@ -1,0 +1,64 @@
+From apache@acm.uva.es Fri Aug 27 13:01:59 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i7RB1xW20259
+	for <judge@juez.localnet>; Fri, 27 Aug 2004 13:01:59 +0200
+Received: by acm.localnet (Postfix)
+	id 906ABFFF7; Fri, 27 Aug 2004 13:01:59 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 8E7A3FFED; Fri, 27 Aug 2004 13:01:59 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10683
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040827110159.8E7A3FFED@acm.localnet>
+Date: Fri, 27 Aug 2004 13:01:59 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10683 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.84 - CRC: D8D24FB3 **/
+/** Date: 2004-08-27 13:01:59 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+//#include<conio.h>
+
+int main()
+{
+	char a[9];
+	long h, m, s;
+	double sec, r;
+	double p, q, x;
+//	clrscr();
+	r = 100000.00 / 86400.00;
+//	freopen("always.in","r",stdin);
+	while(gets(a))
+	{
+	h = (a[0]-48)*10+(a[1]-48);
+	m = (a[2]-48)*10+(a[3]-48);
+	s = (a[4]-48)*1000+(a[5]-48)*100+(a[6]-48)*10+(a[7]-48);
+//	printf("%d %d %d\n",h,m,s);
+	sec = (h * 60.0 + m) * 60.0;
+	sec += (double)s / 100.0;
+//	printf("%lf    ",sec);
+	sec *= r;
+	x = modf(sec, &q);
+
+	m = q;
+	h = 0;
+	while(m) { m/=10; h++; }
+	h = 5 - h;
+	while(h--) printf("0");
+	if(q != 0)
+		printf("%.0lf",q);
+
+	x *= 100;
+	m = x;
+	if(m == 0) printf("00\n");
+	else if(m<10) printf("0%ld\n",m);
+	else printf("%ld\n",m);
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

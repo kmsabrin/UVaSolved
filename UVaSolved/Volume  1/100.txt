@@ -1,0 +1,24 @@
+/* @JUDGE_ID: 34556CP 100 C++ "" */
+/** Date: 2003-08-18 02:26:51 +0200 **/
+
+#include<stdio.h>
+
+int main(void)
+{
+ unsigned long a,b,c,i,j,MAX=1,count=1,m,n;
+
+ while(scanf("%lu %lu",&a,&b)!=EOF){
+ m=a; n=b;
+ if(a>b)  { j=a; a=b; b=j; }
+ for(i=a;i<=b;i++){
+	for(c=i;c!=1; ){
+			count++;
+			if (!(c%2)) c=c/2;
+			else c=3*c+1;
+			}
+		if(count>MAX) MAX=count; count=1;
+		}
+	printf("%lu %lu %lu\n",m,n,MAX);
+  MAX=1; count=1;
+ }
+}

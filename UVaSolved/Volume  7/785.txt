@@ -1,0 +1,78 @@
+From apache@acm.uva.es Wed Apr 21 13:44:49 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i3LBinW23770
+	for <judge@juez.localnet>; Wed, 21 Apr 2004 13:44:49 +0200
+Received: by acm.localnet (Postfix)
+	id D1AE411517; Wed, 21 Apr 2004 13:44:48 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id D01BD11516; Wed, 21 Apr 2004 13:44:48 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 785
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040421114448.D01BD11516@acm.localnet>
+Date: Wed, 21 Apr 2004 13:44:48 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 785 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.80 - CRC: EB367034 **/
+/** Date: 2004-04-21 13:44:48 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <stdlib.h>
+
+char a[41][91], fill;
+
+int painting( int r, int c )
+{
+	if( a[r][c] != ' ' )
+		return 0;
+	a[r][c] = fill;
+	painting( r - 1, c );
+	painting( r + 1, c );
+	painting( r, c - 1 );
+	painting( r, c + 1 );
+	return 0;
+}
+
+int main()
+{
+	int i, j, row, f = 1;
+//	freopen("always.in","r",stdin);
+
+	while( 1 )
+	{
+		i = 0;
+		while( 1 )
+		{
+			if( !gets(a[i]) )
+			{
+				f = 0;
+				break;
+			}
+			if( a[i][0] == '_' )
+				break;
+			i++;
+		}
+		row = i;
+		if( f == 0 )
+			break;
+
+		for( i = 0; i < row; i++ )
+			for( j = 0; a[i][j]; j++ )
+				if( a[i][j] != ' ' && a[i][j] != 'X' )
+				{
+					fill = a[i][j];
+					a[i][j] = ' ';
+					painting( i, j );
+				}
+
+		for( j = 0; j <= row; j++ )
+			puts( a[j] );
+
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

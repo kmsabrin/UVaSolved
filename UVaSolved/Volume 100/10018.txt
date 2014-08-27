@@ -1,0 +1,49 @@
+From apache@acm.uva.es Fri Oct 17 16:03:08 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE36V29547
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:03:06 +0200
+Received: by acm.localnet (Postfix)
+	id 1527AFF7A; Fri, 17 Oct 2003 16:03:07 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 13494FF7E; Fri, 17 Oct 2003 16:03:07 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10018
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140307.13494FF7E@acm.localnet>
+Date: Fri, 17 Oct 2003 16:03:07 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10018 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.65 - CRC: 161D52B0 **/
+/** Date: 2003-10-17 16:03:07 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+unsigned long reverse(unsigned long a){
+	unsigned long i,j;
+	j=0;
+	while(a){ i=a%10; a/=10; j=j*10+i; }
+	return j;
+	}
+int main(){
+	unsigned long i,j,k,p,d,c,f;
+	scanf("%lu",&d);
+	while(d){
+		scanf("%lu",&i);
+		f=1; c=0;
+		while(f){
+			j=reverse(i);
+			k=i+j;
+			c++;
+			p=reverse(k);
+			if(k==p) { printf("%lu %lu",c,k); f=0; }
+			else i=k;
+			}
+		printf("\n");
+		d--;
+		}
+	return 0;
+}
+@END_OF_SOURCE_CODE

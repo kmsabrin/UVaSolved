@@ -1,0 +1,146 @@
+From apache@acm.uva.es Fri Feb 18 06:30:20 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1I5UKl01193
+	for <judge@juez.localnet>; Fri, 18 Feb 2005 06:30:20 +0100
+Received: by acm.localnet (Postfix)
+	id 1902B10B68; Fri, 18 Feb 2005 06:30:20 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 16D9B10B66; Fri, 18 Feb 2005 06:30:20 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10033
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050218053020.16D9B10B66@acm.localnet>
+Date: Fri, 18 Feb 2005 06:30:20 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10033 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.46 - CRC: 4647C09 **/
+/** Date: 2005-02-18 06:30:20 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+//#include<conio.h>
+
+char ram[1001][5];
+
+int convert( int addr )
+{
+	int tmp;
+	tmp = ( ram[addr][0] - 48 ) * 100 +
+	      (	ram[addr][1] - 48 ) * 10  +
+	      ( ram[addr][2] - 48 );
+	return tmp;
+}
+
+int main()
+{
+	int i, n, d, s, a, tmp, ins, c, t, tc;
+	int regs[10];
+	char str[5];
+//	freopen( "a.in", "r", stdin );
+//	clrscr();
+	scanf( "%d", &tc ); getchar(); getchar();
+	while ( tc-- )
+	{
+	memset( regs, 0, sizeof(regs) );
+	memset( ram, 48, sizeof(ram) );
+	i = 0;
+	while( gets( str ) && *str )
+		strcpy ( ram[i++], str );
+	//t = i;
+	//printf( "%d\n", t );
+
+	for( i = ins = 0; i < 1000; ++i )
+	{
+		c = ram[i][0] - 48;
+		tmp = convert( i );
+		if ( tmp == 0 ) { ins++;
+		continue; } // DO NOTHING<
+		ins++; // INCREMENT INSTRUCTION COUNTER<
+		// printf( "ram[%d] = %d, ins=  %d\n", i, tmp, ins );
+		if ( tmp == 100 ) break; // HALT INS<
+
+		if ( c == 2 )
+		{
+			d = ram[i][1] - 48;
+			n = ram[i][2] - 48;
+			regs[d] = n;
+		}
+		else if ( c == 3 )
+		{
+			d = ram[i][1] - 48;
+			n = ram[i][2] - 48;
+			tmp = ( regs[d] + n ) % 1000;
+			regs[d] = tmp;
+		}
+		else if ( c == 4 )
+		{
+			d = ram[i][1] - 48;
+			n = ram[i][2] - 48;
+			tmp = ( regs[d] * n ) % 1000;
+			regs[d] = tmp;
+		}
+		else if ( c == 5 )
+		{
+			d = ram[i][1] - 48;
+			s = ram[i][2] - 48;
+			regs[d] = regs[s];
+		}
+		else if ( c == 6 )
+		{
+			d = ram[i][1] - 48;
+			s = ram[i][2] - 48;
+			tmp = ( regs[d] + regs[s] ) % 1000;
+			regs[d] = tmp;
+		}
+		else if ( c == 7 )
+		{
+			d = ram[i][1] - 48;
+			s = ram[i][2] - 48;
+			tmp = ( regs[d] * regs[s] ) % 1000;
+			regs[d] = tmp;
+		}
+		else if ( c == 8 )
+		{
+			d = ram[i][1] - 48;
+			a = ram[i][2] - 48;
+			tmp = convert( regs[a] );
+			regs[d] = tmp;
+		}
+		else if ( c == 9 )
+		{
+			s = ram[i][1] - 48;
+			a = ram[i][2] - 48;
+			tmp = regs[a];
+			ram[tmp][2] = ( regs[s] % 10 ) + 48; // LSB
+			ram[tmp][1] = ( ( regs[s] / 10 ) % 10 ) + 48;
+			ram[tmp][0] = ( regs[s] / 100 ) + 48; // MSB
+		}
+		else if ( c == 0 )
+		{
+			d = ram[i][1] - 48;
+			s = ram[i][2] - 48;
+			if ( regs[s] == 0 ) ;
+			else
+			    i = regs[d] - 1;
+		}
+  /*		for ( tmp = 0; tmp < 10; ++tmp )
+			printf( "%d - %d, ", tmp, regs[tmp] );
+		printf( "i = %d\n", i );
+  */	}
+	printf( "%d\n", ins );
+	if ( tc ) printf( "\n" );
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+@END_OF_SOURCE_CODE

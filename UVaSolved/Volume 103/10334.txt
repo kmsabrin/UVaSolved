@@ -1,0 +1,48 @@
+From apache@acm.uva.es Fri Oct 17 16:09:17 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE9GV01897
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:09:17 +0200
+Received: by acm.localnet (Postfix)
+	id 521E2FF84; Fri, 17 Oct 2003 16:09:17 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 50347FFB6; Fri, 17 Oct 2003 16:09:17 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10334
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140917.50347FFB6@acm.localnet>
+Date: Fri, 17 Oct 2003 16:09:17 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10334 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.85 - CRC: 9755AB83 **/
+/** Date: 2003-10-17 16:09:17 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main(){
+	int a[1500],b[1500],i,j,k,p,c;
+	while(scanf("%d",&i)!=EOF){
+	for(j=0;j<1500;j++) { a[j]=0; b[j]=-1; }
+	a[0]=1; b[0]=1;
+	while(i){
+		k=0; c=0;
+		while(b[k]!=-1){
+			p=a[k]+b[k]+c;
+			a[k]=b[k];
+			if(p>9) { c=1; b[k]=p-10; }
+			else { c=0; b[k]=p; }
+			k++;
+			}
+		if(c==1) b[k]=1;
+		i--;
+		}
+	for(i=1499;b[i]==-1;i--);
+	for(i;i>-1;i--)
+		printf("%d",b[i]);
+	printf("\n");
+	}
+     return 0;
+     }
+@END_OF_SOURCE_CODE

@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+	int t, cs = 1;
+	double r, d, h;
+	scanf( "%d", &t );
+	while( t-- )
+	{
+		scanf( "%lf %lf %lf", &r, &d, &h );
+		h += 2.0 * sqrt( 2 * r * d - d * d ) * sin( asin( (r - h) / r ) - asin( (r - d) / r ) );
+		printf( "Case %d: %.4lf\n", cs++, h );
+	}
+	return 0;
+}

@@ -1,0 +1,104 @@
+From apache@acm.uva.es Thu Sep 30 15:37:28 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8UDbRW11625
+	for <judge@juez.localnet>; Thu, 30 Sep 2004 15:37:27 +0200
+Received: by acm.localnet (Postfix)
+	id 538C011087; Thu, 30 Sep 2004 15:37:27 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 515F511076; Thu, 30 Sep 2004 15:37:27 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 124
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040930133727.515F511076@acm.localnet>
+Date: Thu, 30 Sep 2004 15:37:27 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 124 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.119 - CRC: 3A58A269 **/
+/** Date: 2004-09-30 15:37:27 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+//#include<conio.h>
+
+char grid[150][150], used[200], given[200];
+int path[200], len, n;
+
+int call(int from)
+{
+	int i, j, f;
+	if(len == n)
+	{
+		for(i = 0; i < n; ++i)
+			printf("%c", path[i]);
+		printf("\n");
+	}
+	for(i = 97; i <= 122; ++i)
+	{
+		if(given[i] && !used[i] && !grid[from][i])
+		{
+			j = len - 1; f = 1;
+			while(j-- > -1)
+				if(grid[path[j]][i])
+				{
+					f = 0; break;
+				}
+			if(!f) continue;
+
+			used[i] = 1;
+			path[len++] = i;
+			call(i);
+			used[i] = 0;
+			len--;
+		}
+	}
+	return 0;
+}
+
+
+
+int main()
+{
+	char str[1000];
+	int i, j, k, f = 0;
+//	freopen("a.in", "r", stdin); clrscr();
+	while(gets(str))
+	{
+	if(f) printf("\n"); f = 1;
+	memset(grid, 0, 150*150);
+	memset(used, 0, 200);
+	memset(given, 0, 200);
+	for(i = n = 0; i < strlen(str); i += 2)
+	{
+		k = str[i];
+		given[k] = 1;
+		grid[k][k] = 1;
+//		printf("%d\n",k);
+		n++;
+	}
+	gets(str);
+	for(i = 0; i < strlen(str); i += 4)
+	{
+		j = str[i]; k = str[i + 2];
+		grid[k][j] = 1;
+//		printf("%d %d\n", k, j);
+	}
+	for(i = 97; i <= 122; ++i)
+	{
+		if(given[i] == 1)
+		{
+			used[i] = 1;
+			len = 0;
+			path[len++] = i;
+			call(i);
+			used[i] = 0;
+		}
+	}
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

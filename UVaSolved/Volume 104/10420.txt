@@ -1,0 +1,66 @@
+From apache@acm.uva.es Tue Feb 24 16:02:29 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i1OF2TW09967
+	for <judge@juez.localnet>; Tue, 24 Feb 2004 16:02:29 +0100
+Received: by acm.localnet (Postfix)
+	id 28CDD10014; Tue, 24 Feb 2004 16:02:29 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 26B18FFF7; Tue, 24 Feb 2004 16:02:29 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10420
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040224150229.26B18FFF7@acm.localnet>
+Date: Tue, 24 Feb 2004 16:02:29 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10420 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.94 - CRC: 59842D68 **/
+/** Date: 2004-02-24 16:02:29 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int sort_function( const void *a, const void *b);
+
+int main(void)
+{
+   int  x, i, j, k;
+   char list[2000][75], temp[75];
+   k = atoi(gets(temp));
+   x = 0;
+   while(x < k)
+   {
+		gets(temp);
+		j = 0;
+		while(temp[j] != ' ')
+		{
+			list[x][j] = temp[j];
+			++j;
+		}
+		list[x][j] ='\0';
+		x++;
+   }
+
+   qsort((void *)list, k, 75, sort_function);
+
+   for (x = 0; x < k; x++)
+   {
+		j = x + 1;
+		i = 1;
+		while(!strcmp( list[x], list[j]))
+		{ j++; i++; }
+		printf("%s %d\n", list[x], i);
+		x = --j;
+   }
+   return 0;
+}
+
+int sort_function( const void *a, const void *b)
+{
+   return( strcmp((char *)a,(char *)b) );
+}
+@END_OF_SOURCE_CODE

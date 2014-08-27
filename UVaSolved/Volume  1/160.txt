@@ -1,0 +1,54 @@
+From apache@acm.uva.es Thu Feb 26 16:10:42 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i1QFAfW23522
+	for <judge@juez.localnet>; Thu, 26 Feb 2004 16:10:42 +0100
+Received: by acm.localnet (Postfix)
+	id CC44EFFF0; Thu, 26 Feb 2004 16:10:41 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id CA06BFFEE; Thu, 26 Feb 2004 16:10:41 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 160
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040226151041.CA06BFFEE@acm.localnet>
+Date: Thu, 26 Feb 2004 16:10:41 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 160 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.60 - CRC: 6EE49AC8 **/
+/** Date: 2004-02-26 16:10:41 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int i,j,k,f,c,b[25];
+	int a[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+
+	while(scanf("%d",&f) && f)
+	{
+	for(i=0;i<25;i++)
+		b[i]=0;
+
+	for(c=2; c<=f; c++)
+		for(j=0,i=c; i>1; j++)
+			while(!(i % a[j]))
+			{
+				i /= a[j];
+				b[j]++;
+			}
+
+	printf("%3d! =",f);
+	for(i=0; b[i] && i<25; i++)
+	{
+	    if(i==15)
+		 printf("\n      ");
+	    printf("%3d",b[i]);
+	}
+	printf("\n");
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

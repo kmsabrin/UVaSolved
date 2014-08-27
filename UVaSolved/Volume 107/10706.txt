@@ -1,0 +1,64 @@
+#include<stdio.h>
+
+int main()
+{
+	unsigned long array[31501];
+	unsigned long digit[31501];
+	unsigned long i, k, j, c, n, r, test;
+
+	array[1] = digit[1] = 1; digit[0] = 0;
+	k = 31500;
+
+	for(i = 2; i <= k; ++i)
+	{
+		if(i < 10)          c = 1;
+		else if(i < 100)    c = 2;
+		else if(i < 1000)   c = 3;
+		else if(i < 10000)  c = 4;
+		else if(i < 100000) c = 5;
+
+		array[i] = array[i - 1] + c;
+		digit[i] = digit[i - 1] + array[i];
+	}
+
+	scanf("%lu", &test);
+	while(test--)
+	{
+		scanf("%lu", &n);
+		for(i = 1; i <= k; ++i)
+			if(digit[i] >= n)
+				break;
+
+		j = digit[i - 1];
+		for(i = 1; ; ++i)
+		{
+			if(i < 10)          c = 1;
+			else if(i < 100)    c = 2;
+			else if(i < 1000)   c = 3;
+			else if(i < 10000)  c = 4;
+			else if(i < 100000) c = 5;
+
+			j += c;
+			if( j >= n )
+			{
+				while(1)
+				{
+					r = i % 10;
+					if(j == n)
+					{
+						printf("%lu\n", r);
+						break;
+					}
+					j--;
+					i /= 10;
+				}
+				break;
+			}
+		}
+	}
+
+//	printf("only for k = %ld we get  %.0lf digits\n",k,array[k]);
+//	printf("upto     k = %ld we get  %.0lf digits\n",k,digit[k]);
+// 	getchar();
+	return 0;
+}

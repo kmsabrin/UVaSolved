@@ -1,0 +1,75 @@
+From apache@acm.uva.es Wed Jan  5 17:32:01 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j05GW1312767
+	for <judge@juez.localnet>; Wed, 5 Jan 2005 17:32:01 +0100
+Received: by acm.localnet (Postfix)
+	id 66B0E111EF; Wed,  5 Jan 2005 17:32:01 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 54333111F1; Wed,  5 Jan 2005 17:32:01 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 331
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050105163201.54333111F1@acm.localnet>
+Date: Wed,  5 Jan 2005 17:32:01 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 331 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.43 - CRC: 8D8F42F3 **/
+/** Date: 2005-01-05 17:32:01 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+
+int count, n, arr[6];
+
+void swap ( int i, int j )
+{
+	int k;
+	k = arr[i];
+	arr[i] = arr[j];
+	arr[j] = k;
+}
+
+void call()
+{
+	int i, j;
+	for ( i = j = 0; i < n - 1; ++i )
+		if ( arr[i] > arr[i + 1] )
+		{
+			j = 1;
+			swap ( i, i + 1 );
+			call ();
+			swap ( i, i + 1 );
+		}
+	if ( !j ) count++;
+}
+
+int sorted()
+{
+	int i, j;
+	for ( i = j = 0; i < n - 1; ++i )
+		if ( arr[i] > arr[i + 1] )
+		{
+			j = 1;
+			break;
+		}
+	return j;
+}
+
+int main()
+{
+	int i, t = 1;
+
+	while( scanf( "%d", &n ) && n )
+	{
+		for ( i = 0; i < n; ++i )
+			scanf ( "%d", &arr[i] );
+		count = 0;
+		if ( sorted() ) call();
+		printf( "There are %d swap maps for input data set %d.\n", count, t++ );
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

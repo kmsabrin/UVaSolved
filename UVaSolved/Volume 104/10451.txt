@@ -1,0 +1,42 @@
+From apache@acm.uva.es Fri Oct 17 16:00:26 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE0QV26463
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:00:26 +0200
+Received: by acm.localnet (Postfix)
+	id A8C13FF74; Fri, 17 Oct 2003 16:00:26 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id A6BE8FF7A; Fri, 17 Oct 2003 16:00:26 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10451
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140026.A6BE8FF7A@acm.localnet>
+Date: Fri, 17 Oct 2003 16:00:26 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10451 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.65 - CRC: 5D79F2F6 **/
+/** Date: 2003-10-17 16:00:26 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+int main(){
+	double a1,a2,A,n,r1,r2,pi,x;
+   int i=1;
+   pi=2*acos(0.0);
+   while(scanf("%lf %lf",&n,&A)==2){
+      if(n<3) break;
+   	r1=2*A/(n*sin(2*pi/n));
+   	a1=pi*r1-A;
+   	x=sqrt(r1)*sin(2*pi/n)/sin((n*pi-2*pi)/(2*n));
+   	r2=r1-x*x/4;
+   	a2=A-pi*r2;
+   	printf("Case %d: %.5lf %.5lf\n",i,a1,a2);
+      i++;
+   	}
+   return 0;
+}
+
+@END_OF_SOURCE_CODE

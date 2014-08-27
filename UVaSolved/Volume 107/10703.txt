@@ -1,0 +1,74 @@
+From apache@acm.uva.es Thu Aug 26 16:26:43 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i7QEQhW15756
+	for <judge@juez.localnet>; Thu, 26 Aug 2004 16:26:43 +0200
+Received: by acm.localnet (Postfix)
+	id 034E31001F; Thu, 26 Aug 2004 16:26:43 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 00F57FFEC; Thu, 26 Aug 2004 16:26:42 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10703
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040826142642.00F57FFEC@acm.localnet>
+Date: Thu, 26 Aug 2004 16:26:42 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10703 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.71 - CRC: 6E2E96F8 **/
+/** Date: 2004-08-26 16:26:42 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+//#include<conio.h>
+
+char c[1001][501];
+
+
+int main()
+{
+	long h, w, N, x1, y1, x2, y2, i, j, count, free, f = 0, tmp;
+
+//	clrscr();
+//	freopen("always.in", "r", stdin);
+
+	while(scanf("%ld %ld %ld", &h, &w, &N) && (h || w ||N))
+	{
+
+	if(f == 1)
+		getchar();
+	f = 1;
+
+	for(i=0; i<=1000; i++)
+		for(j=0; j<=500; j++)
+			c[i][j] = 0;
+
+	count = 0;
+	while(N--)
+	{
+		scanf("%ld %ld %ld %ld", &x1, &y1, &x2, &y2);
+      		if(x1 > x2) { tmp = x1; x1 = x2; x2 = tmp; }
+      		if(y1 > y2) { tmp = y1; y1 = y2; y2 = tmp; }
+		for(i=x1; i<=x2; i++)
+			for(j=y1; j<=y2; j++)
+				if(c[i][j] == 0)
+				{
+					c[i][j] = 1;
+					count++;
+				}
+	}
+
+	free = h * w - count;
+	if(free == 0)
+		printf("There is no empty spots.\n");
+	else if(free == 1)
+		printf("There is one empty spot.\n");
+	else
+		printf("There are %ld empty spots.\n",free);
+
+	}
+       
+	return 0;
+}
+@END_OF_SOURCE_CODE

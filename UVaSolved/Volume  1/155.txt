@@ -1,0 +1,62 @@
+From apache@acm.uva.es Tue Mar 23 04:47:44 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2N3lhW24831
+	for <judge@juez.localnet>; Tue, 23 Mar 2004 04:47:43 +0100
+Received: by acm.localnet (Postfix)
+	id C25A71000C; Tue, 23 Mar 2004 04:47:44 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id C0A481000E; Tue, 23 Mar 2004 04:47:44 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 155
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040323034744.C0A481000E@acm.localnet>
+Date: Tue, 23 Mar 2004 04:47:44 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 155 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.27.248 - CRC: CB5EA063 **/
+/** Date: 2004-03-23 04:47:44 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int pointx, pointy, count;
+
+int callback(int cx, int cy, int k)
+{
+	int x1, x2, x3, x4, y1, y2, y3, y4;
+
+	x1 = x3 = cx - k;
+	x2 = x4 = cx + k;
+	y1 = y2 = cy - k;
+	y3 = y4 = cy + k;
+	if(pointx >= x1 && pointx <= x2 && pointy >= y1 && pointy <= y3)
+		count++;
+
+	k /= 2;
+	if(k >= 1)
+	{
+		callback(x1, y1, k);
+		callback(x2, y2, k);
+		callback(x3, y3, k);
+		callback(x4, y4, k);
+	}
+
+	return 0;
+}
+
+int main()
+{
+	int k;
+	while(scanf("%d %d %d", &k, &pointx, &pointy) &&k &&pointx &&pointy)
+	{
+		count = 0;
+		callback(1024, 1024, k);
+		printf("%3d\n",count);
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

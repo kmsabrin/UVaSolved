@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<string.h>
+
+char pre[60];
+
+void call(char str[], int index)
+{
+	char left[60], right[60], c;
+	int i, j, k;
+
+	// find pre[index] i.e that root of preord in inord
+	c = pre[index];
+	for(i = 0; str[i]; ++i)
+		if(c == str[i])
+			break;
+
+	//calculate left
+	for(j = 0; j < i; ++j)
+		left[j] = str[j];
+	left[j] = '\0';
+	//printf("left is = %s\n",left);
+	k = strlen(left);
+	if(k == 0);
+	else if(k == 1) printf("%c",left[0]);
+	else call(left, index + 1);
+
+	//calculate right
+	for(j = i + 1, k = 0; str[j]; j++)
+		right[k++] = str[j];
+	right[k] = '\0';
+	//printf("right is = %s\n",right);
+	k = strlen(right);
+	if(k == 0);
+	else if(k == 1) printf("%c",right[0]);
+	else call(right, strlen(left) + index + 1);
+
+	//print root
+	printf("%c",pre[index]);
+}
+
+int main()
+{
+	char in[60];
+	int test, n;
+	scanf("%d", &test);
+	while(test--)
+	{
+		scanf("%d %s %s",&n, pre, in);
+		call(in, 0);
+		printf("\n");
+	}
+	return 0;
+}

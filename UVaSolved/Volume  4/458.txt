@@ -1,0 +1,33 @@
+From apache@acm.uva.es Sun Sep 28 16:23:36 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h8SENZV10715
+	for <judge@juez.localnet>; Sun, 28 Sep 2003 16:23:35 +0200
+Received: by acm.localnet (Postfix)
+	id D98AA10082; Sun, 28 Sep 2003 16:23:35 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id D7B7C1008C; Sun, 28 Sep 2003 16:23:35 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 458
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030928142335.D7B7C1008C@acm.localnet>
+Date: Sun, 28 Sep 2003 16:23:35 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 458 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.80 - CRC: 8E1B2D83 **/
+/** Date: 2003-09-28 16:23:35 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main(){
+	 char str[1000]; int i;
+	 while(gets(str)&&str[0]!=EOF){
+		for(i=0;str[i];i++)
+			printf("%c",str[i]-7);
+			printf("\n");
+		}
+	 return 0;
+}
+@END_OF_SOURCE_CODE

@@ -1,0 +1,99 @@
+From apache@acm.uva.es Fri Mar 18 19:50:24 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j2IIoO417287
+	for <judge@juez.localnet>; Fri, 18 Mar 2005 19:50:24 +0100
+Received: by acm.localnet (Postfix)
+	id B55E711406; Fri, 18 Mar 2005 19:51:15 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id B382211386; Fri, 18 Mar 2005 19:51:15 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 260
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050318185115.B382211386@acm.localnet>
+Date: Fri, 18 Mar 2005 19:51:15 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 260 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.42 - CRC: E4504135 **/
+/** Date: 2005-03-18 19:51:15 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+
+char b[211][211], used[211][211];
+int f, N;
+
+int check( int i, int j )
+{
+	if ( i >= N || i < 0 || j >= N || j < 0 )
+		return 0;
+	return 1;
+}
+
+void Bcall( int i, int j, int r )
+{
+	if ( f )
+		return;
+	if ( check( i, j ) == 0 )
+		return;
+	if ( b[i][j] != 'b' )
+		return;
+	if ( used[i][j] )
+		return;
+	if ( r == N - 1 )
+	{
+		f = 1;
+		return;
+	}
+
+	used[i][j] = 1;
+
+	/*Bcall( i - 1, j - 1, r - 1 );*/
+	/*Bcall( i - 1, j, r - 1 );*/
+	Bcall( i, j - 1, r );
+	Bcall( i, j + 1, r );
+	Bcall( i + 1, j , r + 1 );
+	Bcall( i + 1, j + 1, r + 1 );
+
+	/*used[i][j] = 0;*/
+
+}
+
+int main()
+{
+
+	int i, c = 1;
+	/*freopen( "a.in", "r", stdin );*/
+	
+	while ( scanf( "%d", &N ) && N )
+	{
+		for ( i = 0; i < N; ++i )
+			scanf( "%s", b[i] );
+
+		f = 0;
+		memset( used, 0, sizeof( used ) );
+		for ( i = 0; i < N; ++i )
+		{
+			if ( b[0][i] == 'b' )
+				Bcall( 0, i, 0 );
+			if ( f )
+			{
+				printf( "%d B\n", c++ );
+				break;
+			}
+		}
+
+		if ( f ) continue;
+
+		printf( "%d W\n", c++ );	
+	}
+
+	return 0;
+
+}
+
+	
+@END_OF_SOURCE_CODE

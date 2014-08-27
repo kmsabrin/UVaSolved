@@ -1,0 +1,61 @@
+From apache@acm.uva.es Thu Nov  6 03:59:15 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hA62xFV11394
+	for <judge@juez.localnet>; Thu, 6 Nov 2003 03:59:15 +0100
+Received: by acm.localnet (Postfix)
+	id BB760FFCD; Thu,  6 Nov 2003 03:59:15 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id B975DFFCE; Thu,  6 Nov 2003 03:59:15 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10242
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031106025915.B975DFFCE@acm.localnet>
+Date: Thu,  6 Nov 2003 03:59:15 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10242 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.22.250 - CRC: 8DBDA0DC **/
+/** Date: 2003-11-06 03:59:15 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	double p[8],a,b,c,d1,d2;
+   int i,j,i1,j1,f;
+
+   while(scanf("%lf",&p[0])!=EOF)
+   {
+   	for(i=1;i<8;i++)
+      	scanf("%lf",&p[i]);
+
+      for(i=0,f=1;i<6&&f;i+=2)
+      	for(j=i+2;j<8;j+=2)
+         	if(p[i]==p[j]&&p[i+1]==p[j+1])
+            {
+            	i1=i;
+               j1=j;
+               f=0;
+               break;
+            }
+
+
+      for(i=a=b=0;i<8;i+=2)
+      	if(i!=i1&&i!=j1)
+         {
+         	a+=p[i];
+            b+=p[i+1];
+         }
+
+      d1=a-p[i1];
+      d2=b-p[i1+1];
+
+      printf("%.3lf %.3lf\n",d1,d2);
+
+   }
+   return 0;
+}
+@END_OF_SOURCE_CODE

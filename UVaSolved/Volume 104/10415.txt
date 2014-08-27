@@ -1,0 +1,82 @@
+From apache@acm.uva.es Wed Sep 29 04:40:24 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8T2eOW26538
+	for <judge@juez.localnet>; Wed, 29 Sep 2004 04:40:24 +0200
+Received: by acm.localnet (Postfix)
+	id 6FB7CFFDC; Wed, 29 Sep 2004 04:40:24 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6D657FFBF; Wed, 29 Sep 2004 04:40:24 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10415
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040929024024.6D657FFBF@acm.localnet>
+Date: Wed, 29 Sep 2004 04:40:24 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10415 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.36 - CRC: C233DF10 **/
+/** Date: 2004-09-29 04:40:24 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+
+int note[14][11] = { 0,0,1,1,1,0,0,1,1,1,1,
+		     0,0,1,1,1,0,0,1,1,1,0,
+		     0,0,1,1,1,0,0,1,1,0,0,
+		     0,0,1,1,1,0,0,1,0,0,0,
+		     0,0,1,1,1,0,0,0,0,0,0,
+		     0,0,1,1,0,0,0,0,0,0,0,
+		     0,0,1,0,0,0,0,0,0,0,0,
+		     0,0,0,1,0,0,0,0,0,0,0,
+		     0,1,1,1,1,0,0,1,1,1,0,
+		     0,1,1,1,1,0,0,1,1,0,0,
+		     0,1,1,1,1,0,0,1,0,0,0,
+		     0,1,1,1,1,0,0,0,0,0,0,
+		     0,1,1,1,0,0,0,0,0,0,0,
+		     0,1,1,0,0,0,0,0,0,0,0 };
+
+int main()
+{
+	char str[202], cur[11], but[11];
+	int  i, j, k, t;
+
+	scanf("%d", &t); getchar();
+	while(t--)
+	{
+	memset(but, 0, 11);
+	memset(cur, 0 , 11);
+	gets(str);
+	for( i = 0; str[i]; ++i)
+	{
+		if(str[i] >= 99)
+			j = str[i] - 99;
+		else if(str[i] > 90 && str[i] < 99 )
+			j = str[i] - 92;
+		else if(str[i] >= 67)
+			j = str[i] - 60;
+		else
+			j = str[i] - 53;
+
+		for(k = 1; k <= 10; ++k)
+		{
+			if( note[j][k] == 1 && cur[k] == 0 )
+			{
+				cur[k] = 1;
+				but[k]++;
+			}
+			if( note[j][k] == 0 && cur[k] == 1)
+				cur[k] = 0;
+		}
+	}
+	printf("%d", but[1]);
+	for(i = 2; i <= 10; ++i)
+		printf(" %d", but[i]);
+	printf("\n");
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

@@ -1,0 +1,127 @@
+From apache@acm.uva.es Thu Mar 10 14:17:25 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j2ADHPl11452
+	for <judge@juez.localnet>; Thu, 10 Mar 2005 14:17:25 +0100
+Received: by acm.localnet (Postfix)
+	id 3F88A1132D; Thu, 10 Mar 2005 14:17:25 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 3DDD51131B; Thu, 10 Mar 2005 14:17:25 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10827
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050310131725.3DDD51131B@acm.localnet>
+Date: Thu, 10 Mar 2005 14:17:25 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10827 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.50 - CRC: 58B07D07 **/
+/** Date: 2005-03-10 14:17:25 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAXIMUM( i, j ) i > j ? i : j
+
+int main()
+{
+	int cum[81][81];
+	char in[501], *p;
+	int i, j, k, max, tc, tmp, neg, flg, N;
+	int maxsum1, maxsum2, minsum1, minsum2;
+	int URmax, URmin, WRmax, WRmin;
+	int tot1, tot2;
+	/*freopen( "a.in", "r", stdin );*/
+	
+	tc = atoi( gets( in ) );
+	while ( tc-- )
+	{		
+		N = atoi( gets( in ) );
+		
+		memset( cum, 0, sizeof( cum ) );
+		i = 1; neg = -101; 		
+		for ( k = 0; k < N; ++k, ++i )
+		{
+			j = 0;
+			gets( in );
+			p = strtok( in, " " );
+			tmp = atoi( p );
+			cum[i][j++] = tmp + cum[i - 1][j];
+			if ( tmp > neg ) neg = tmp;
+
+			while ( p = strtok( NULL, " " ) )
+			{
+				tmp = atoi( p );
+				cum[i][j++] = tmp + cum[i - 1][j];
+				if ( tmp > neg ) neg = tmp;
+
+			}
+		}
+
+		if ( neg <= 0 ) 
+		{ 
+			printf( "%d\n", neg );
+			continue;
+		}
+
+		max = 0;
+		for ( i = N; i > 0; --i )
+			for ( j = 0; j < i; ++j )
+			{
+				tot1 = maxsum1 = minsum1 = URmax = URmin = 0;
+				flg = 0;
+				if ( i < N && i > 1 && j > 0 )
+				{
+					flg = 1;
+					tot2 = maxsum2 = minsum2 = WRmax = WRmin = 0;
+				}
+
+				for ( k = 0; k < N; ++k )
+				{
+					tmp = cum[i][k] - cum[j][k];
+					tot1 += tmp;
+					maxsum1 += tmp;
+					minsum1 += tmp;
+					if ( maxsum1 < 0 ) maxsum1 = 0;
+					if ( minsum1 > 0 ) minsum1 = 0;
+					
+					if ( maxsum1 > URmax ) URmax = maxsum1;
+					if ( minsum1 < URmin ) URmin = minsum1;
+
+
+											
+					if ( flg )
+					{												 
+						tmp = cum[N][k] - cum[i][k] + cum[j][k];						
+						tot2 += tmp;
+						maxsum2 += tmp;
+						minsum2 += tmp;
+
+						if ( maxsum2 < 0 ) maxsum2 = 0;
+                        if ( minsum2 > 0 ) minsum2 = 0;
+						
+						if ( maxsum2 > WRmax ) WRmax = maxsum2;
+						if ( minsum2 < WRmin ) WRmin = minsum2;
+					
+					}
+				}			
+				tmp = MAXIMUM( URmax, tot1 - URmin );
+				if ( tmp > max ) max = tmp;
+				if ( flg )
+				{
+					tmp = MAXIMUM( WRmax, tot2 - WRmin );
+					if ( tmp > max ) max = tmp;
+				}
+			}
+	
+		
+		printf ( "%d\n", max );
+	}
+
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

@@ -1,0 +1,47 @@
+From apache@acm.uva.es Mon Dec  1 05:02:41 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hB142eW06956
+	for <judge@juez.localnet>; Mon, 1 Dec 2003 05:02:40 +0100
+Received: by acm.localnet (Postfix)
+	id 7E534FF90; Mon,  1 Dec 2003 05:02:40 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 7CB43FF91; Mon,  1 Dec 2003 05:02:40 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10209
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031201040240.7CB43FF91@acm.localnet>
+Date: Mon,  1 Dec 2003 05:02:40 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10209 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.29.245 - CRC: FA1092 **/
+/** Date: 2003-12-01 05:02:40 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+	double a,b,c,d,e,f,pi;
+
+   pi = 2 * acos(0.0);
+
+   while(scanf("%lf",&a)!=EOF)
+   {
+   	b = a*a/2.0 ;
+   	c = b*pi/2.0 - b*pi/6.0 - b*sin(pi/6.0)*cos(pi/6.0);
+   	d = 4.0 * (a*a - b*pi + 2.0*c);
+      e = 4.0 * (a*a - b*pi/2.0 - d/2.0);
+      f = a*a - d - e;
+   	printf("%.3lf %.3lf %.3lf\n",f,e,d);
+
+   }
+
+   return 0;
+}
+
+
+@END_OF_SOURCE_CODE

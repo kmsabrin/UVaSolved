@@ -1,0 +1,86 @@
+From apache@acm.uva.es Sun Mar 27 16:33:36 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j2REXZ415713
+	for <judge@juez.localnet>; Sun, 27 Mar 2005 16:33:35 +0200
+Received: by acm.localnet (Postfix)
+	id 8B3BB11325; Sun, 27 Mar 2005 16:33:54 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 88DDC11322; Sun, 27 Mar 2005 16:33:54 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 263
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050327143354.88DDC11322@acm.localnet>
+Date: Sun, 27 Mar 2005 16:33:54 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 263 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.44 - CRC: FA393F3F **/
+/** Date: 2005-03-27 16:33:54 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int comp1( const void *i, const void *j )
+{
+	return *(char *)i - *(char *)j;
+}
+
+int comp2( const void *i, const void *j )
+{
+	return *(char *)j - *(char *)i;
+}
+
+int in_asc( int num )
+{
+	char str[17];
+	sprintf( str, "%d", num );
+	qsort( (void *)str, strlen( str ), sizeof(char), comp1 );
+	return atoi( str );
+}
+
+int in_des( int num )
+{
+	char str[17];
+	sprintf( str, "%d", num );
+	qsort( (void *)str, strlen( str ), sizeof(char), comp2 );
+	return atoi( str );
+}
+
+int main()
+{
+	int asc, des, num, count;
+	int i, flg;
+	int store[1007];
+
+	while ( scanf( "%d", &num ) && num )
+	{
+		printf( "Original number was %d\n", num );
+		count = 0; flg = 1;
+		while ( 1 )
+		{
+			asc = in_asc( num );
+			des = in_des( num );
+			num = des - asc;
+			printf( "%d - %d = %d\n", des, asc, num );
+
+			for ( i = 0; i < count; ++i )
+				if ( store[i] == num )
+				{
+					flg = 0;
+					break;
+				}
+			if ( !flg ) break;
+
+			store[count++] = num;
+		}
+		printf( "Chain length %d\n\n", count + 1 );
+	}
+	return 0;
+}
+
+
+@END_OF_SOURCE_CODE

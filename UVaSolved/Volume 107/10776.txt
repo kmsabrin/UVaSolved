@@ -1,0 +1,91 @@
+From apache@acm.uva.es Sun Nov 21 03:36:59 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id iAL2axd17908
+	for <judge@juez.localnet>; Sun, 21 Nov 2004 03:36:59 +0100
+Received: by acm.localnet (Postfix)
+	id F28A110714; Sun, 21 Nov 2004 03:36:58 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id EF5DD10432; Sun, 21 Nov 2004 03:36:58 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10776
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041121023658.EF5DD10432@acm.localnet>
+Date: Sun, 21 Nov 2004 03:36:58 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10776 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.52 - CRC: FEADE0C6 **/
+/** Date: 2004-11-21 03:36:58 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define max 100
+
+char used[max], str[max];
+int  path[max], cond[max], len, n, size;
+
+int comp( const void *i, const void *j )
+{
+	return *(char *)i - *(char *)j;
+}
+
+int call( int node )
+{
+	int i;
+	if ( len == size )
+	{
+		for ( i = 0; i < size; ++i )
+			printf( "%c", str[path[i]] );
+		printf( "\n" );
+		return 0;
+	}
+	for ( i = node + 1; i < n; ++i )
+		if ( !used[i] )
+		{
+			if ( cond[i] )
+				if ( !used[cond[i] - 1] )
+					continue;
+			used[i] = 1;
+			path[len++] = i;
+			call( i );
+			used[i] = 0;
+			--len;
+		}
+	return 0;
+}
+
+int main()
+{
+	int i, j, k;
+
+	while( scanf("%s %d", str, &size ) != EOF )
+	{
+		memset( used, 0, max );
+		memset( cond, 0, max * sizeof(int) );
+
+		n = strlen( str );
+		qsort( str, n, sizeof(char), comp );
+
+		for ( i = 0; i < n; ++i )
+			if ( !cond[i] )
+				for ( j = k = i + 1; j < n; ++j )
+					if ( str[i] == str[j] )
+						cond[j] = k++;
+		for ( i = 0; str[i]; ++i )
+		{
+			if ( cond[i] ) continue;
+			used[i] = 1;
+			len = 0;
+			path[len++] = i;
+			call( i );
+			used[i] = 0;
+		}
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

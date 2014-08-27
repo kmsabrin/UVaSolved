@@ -1,0 +1,52 @@
+From apache@acm.uva.es Sun Dec 26 08:24:30 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id iBQ7OU301393
+	for <judge@juez.localnet>; Sun, 26 Dec 2004 08:24:30 +0100
+Received: by acm.localnet (Postfix)
+	id F3A0811304; Sun, 26 Dec 2004 08:24:29 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id F2298FFDE; Sun, 26 Dec 2004 08:24:29 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 474
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041226072429.F2298FFDE@acm.localnet>
+Date: Sun, 26 Dec 2004 08:24:29 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 474 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.51 - CRC: 3C836D9C **/
+/** Date: 2004-12-26 08:24:29 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<math.h>
+#include<stdio.h>
+
+int main()
+{
+	long double m, n, x, y, z;
+	while( scanf( "%Lf", &n ) != EOF )
+	{
+		z = n * log10( 2.0 );
+		m = ceil( z );
+		y = m - z;
+		x = pow( 10.0, y );
+		printf ( "2^-%.0Lf = %.3Lfe-%.0Lf\n", n, x, m );
+	}
+	return 0;
+}
+
+/* calculation
+
+     2^-n = x * 10^-m
+     => -n * log10( 2 ) = log10( x ) + ( -m )
+     Since log10( x ) < 1 and m is integer
+     m = ceiling( n * log10( 2 ) )
+
+     Let, y = m - n * log10( 2 );
+     So, log10( x ) =  y;
+     => x = 10^y;
+*/
+
+@END_OF_SOURCE_CODE

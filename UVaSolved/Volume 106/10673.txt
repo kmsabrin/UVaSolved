@@ -1,0 +1,50 @@
+From apache@acm.uva.es Sun Sep 19 03:38:12 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8J1cCW07487
+	for <judge@juez.localnet>; Sun, 19 Sep 2004 03:38:12 +0200
+Received: by acm.localnet (Postfix)
+	id A65AC10F9C; Sun, 19 Sep 2004 03:38:12 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id A314C10F98; Sun, 19 Sep 2004 03:38:12 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10673
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040919013812.A314C10F98@acm.localnet>
+Date: Sun, 19 Sep 2004 03:38:12 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10673 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.106 - CRC: 53F3D28 **/
+/** Date: 2004-09-19 03:38:12 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	long test, x, k, p, q, a, b;
+	scanf("%ld", &test);
+	while(test--)
+	{
+		scanf("%ld %ld", &x, &k);		
+		if(x % k)
+		{
+			a = x / k;
+			q = x - a * k;
+			p = k - q;
+		}
+		else
+		{
+			p = 0;
+			q = k;
+		}
+		printf("%ld %ld\n", p, q);
+
+	}
+	return 0;
+}
+
+
+@END_OF_SOURCE_CODE

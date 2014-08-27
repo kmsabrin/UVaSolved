@@ -1,0 +1,59 @@
+From apache@acm.uva.es Sat Feb 26 14:57:31 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1QDvVl03459
+	for <judge@juez.localnet>; Sat, 26 Feb 2005 14:57:31 +0100
+Received: by acm.localnet (Postfix)
+	id 3D3E311349; Sat, 26 Feb 2005 14:57:31 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 3BA1D11343; Sat, 26 Feb 2005 14:57:31 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10773
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050226135731.3BA1D11343@acm.localnet>
+Date: Sat, 26 Feb 2005 14:57:31 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10773 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.58 - CRC: 9ADBDCE2 **/
+/** Date: 2005-02-26 14:57:31 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <math.h>
+#include <stdio.h>
+
+#define EP 0.00001
+
+int main()
+{
+	double d, v, u, t1, t2;
+	int t, c = 1, f;
+	scanf( "%d", &t );
+	while ( t-- )
+	{
+		scanf( "%lf %lf %lf", &d, &v, &u );
+
+		printf( "Case %d: ", c++ );
+		f = 1;
+/*		if ( fabs( u ) < EP ) f = 0;
+		if ( fabs( v - u ) < EP ) f = 0;
+		if ( u < v ) f = 0;
+*/		if (v >= u || u == 0 || v == 0 )
+			f = 0;
+		if ( !f )
+			printf( "can't determine\n" );
+		else
+		{
+			t1 = sqrt( u * u - v * v );
+			t1 = d / t1;
+			t2 = d / u;
+			printf( "%.3lf\n", fabs( t1 - t2 ) );
+		}
+	}
+	return 0;
+}
+
+
+
+@END_OF_SOURCE_CODE

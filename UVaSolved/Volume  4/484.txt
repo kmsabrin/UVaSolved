@@ -1,0 +1,72 @@
+From apache@acm.uva.es Wed Oct  6 19:12:26 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i96HCQW17882
+	for <judge@juez.localnet>; Wed, 6 Oct 2004 19:12:26 +0200
+Received: by acm.localnet (Postfix)
+	id 9C22E10FE7; Wed,  6 Oct 2004 19:12:26 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 989A410F58; Wed,  6 Oct 2004 19:12:26 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 484
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041006171226.989A410F58@acm.localnet>
+Date: Wed,  6 Oct 2004 19:12:26 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 484 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.41 - CRC: 28A11801 **/
+/** Date: 2004-10-06 19:12:26 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define limit 100000
+
+int a[limit];
+char str[limit], track[limit];
+
+int main()
+{
+	char *ptr;
+	int i,j,c,d,in;
+//	freopen("a.in", "r", stdin);
+	in = 0;
+	while(gets(str))
+	{
+	ptr = strtok(str, " ");
+	a[in++] = atoi(ptr);
+	while(ptr = strtok(NULL, " "))
+		a[in++] = atoi(ptr);
+	}
+
+	memset(track, 0, limit);
+	for(i = 0; i < in; i++)
+	{
+		if(track[i] == 0)
+		{
+			d = a[i];
+			c = 0;
+//			printf("for %d: ", d);
+			for(j = i; j < in; ++j)
+			{
+				if(a[j] == d && track[j
+
+				] == 0)
+				{
+					c++;
+					track[j] = 1;
+				}
+			}
+		printf("%d %d\n", d, c);
+		}
+	}
+
+
+	return 0;
+
+}
+@END_OF_SOURCE_CODE

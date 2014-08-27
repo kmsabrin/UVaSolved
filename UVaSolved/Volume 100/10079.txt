@@ -1,0 +1,14 @@
+Date: Fri, 17 Oct 2003 16:08:59 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10079 C "" */
+
+#include<stdio.h>
+int main(){
+	long double i,j;
+	while(scanf("%Lf",&i) && i>=0){
+		j=i/2;
+		j=j*(i+1);
+		printf("%.0Lf\n",j+1);
+		}
+	return 0;
+}

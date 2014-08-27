@@ -1,0 +1,99 @@
+From apache@acm.uva.es Sun Sep 19 03:37:58 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8J1bwW07428
+	for <judge@juez.localnet>; Sun, 19 Sep 2004 03:37:58 +0200
+Received: by acm.localnet (Postfix)
+	id 9479910F9C; Sun, 19 Sep 2004 03:37:58 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 9186610F98; Sun, 19 Sep 2004 03:37:58 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10700
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040919013758.9186610F98@acm.localnet>
+Date: Sun, 19 Sep 2004 03:37:58 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10700 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.106 - CRC: CF11BCCA **/
+/** Date: 2004-09-19 03:37:58 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int b[101];
+	int i, j, k, x, l;
+	long long max, min, a[101], d[101];
+	char c[10001];
+//	freopen("a.in","r",stdin);
+	scanf("%d", &l);
+	getchar();
+	while(l--)
+	{
+		gets(c);
+		i = j = x = 0;
+		while(1)
+		{
+			k = 0;
+			while( c[i] >= 48  && c[i] <= 57 && c[i] )
+			{
+				k = k * 10  + c[i] - 48;
+				i++;
+			}
+
+			a[x] = d[x] = k;
+			x++;
+			if( !c[i] )
+				break;
+			else if( c[i] == '+' )
+				b[j++] = 1;
+			else if( c[i] == '*')
+				b[j++] = 0;
+
+			i++;
+		}
+		//a and d holds the operands
+		//b holds the opcodes ( 0 for *, 1 for + )
+		//CHECK point
+		//for(k=0; k<x; k++) printf("%d ",a[k]); printf("\t");
+		//for(k=0; k<j; k++) printf("%d ",b[k]); printf("\n");
+
+//   FINDING MINIMUM VALUE
+//   DOING THE MULTIPLICATION FIRST
+		for( i = 0; i < j; i++ )
+		{
+			if( b[i] == 0 )
+			{
+				a[i + 1] *= a[i];
+				a[i] = 0;
+			}
+			//check functionality
+			//for(k=0; k<x; k++) printf("%d ",a[k]);//printf("\n");
+		}
+		for( i = min = 0; i < x; i++ )
+			min += a[i];
+
+//    FINDING MAXIMUM VALUE
+//    DOING THE ADDITION FIRST
+		for( i = 0; i < j; i++ )
+		{
+			if( b[i] == 1 )
+			{
+				d[i + 1] += d[i];
+				d[i] = 1;
+			}
+			//check functionality
+			//for(k=0; k<x; k++) printf("%d ",d[k]); printf("\n");
+		}
+		for( i = 0, max = 1; i < x; i++ )
+			max *= d[i];
+
+		printf("The maximum and minimum are %lld and %lld.\n", max, min);
+
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

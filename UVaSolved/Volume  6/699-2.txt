@@ -1,0 +1,129 @@
+From apache@acm.uva.es Sat Apr 10 18:41:19 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i3AGfJW09274
+	for <judge@juez.localnet>; Sat, 10 Apr 2004 18:41:19 +0200
+Received: by acm.localnet (Postfix)
+	id 77BB710037; Sat, 10 Apr 2004 18:41:19 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 752F510036; Sat, 10 Apr 2004 18:41:19 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 699
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040410164119.752F510036@acm.localnet>
+Date: Sat, 10 Apr 2004 18:41:19 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 699 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.107 - CRC: 62CFA6B2 **/
+/** Date: 2004-04-10 18:41:19 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int tree[10000];
+int pile[90];
+int index, pile_pos, tmp, flg, max;
+
+int call( int position )
+{
+	int nodevalue, hold;
+
+	nodevalue = tree[position];
+	if(nodevalue == -1)
+		return 0;
+
+	pile[pile_pos] += nodevalue;
+
+	/* calling left tree*/
+	hold = pile_pos;  /* holding the current position to use later*/
+	--pile_pos;       /* one unit left*/
+	index++;          /* next value in the tree*/
+	position = index;
+	call(position);
+
+	/* calling right tree*/
+	pile_pos = hold;
+	++pile_pos;       /* one unit right*/
+	index++;
+	position = index;
+	call(position);
+
+	return 0;
+}
+
+/* for the stupid several line single input  */
+int check( int position )
+{
+	if(flg == 0) return 0;
+	if(tree[position] == -1) return 0;
+	if(tmp > max) { flg = 0; return 0;}
+	tmp++;
+	position = tmp;
+	check( position );
+	if(flg == 0 ) return 0;
+	tmp++;
+	position = tmp;
+	check( position);
+	return 0;
+}
+
+int main()
+{
+	char str[1000];
+	char *p;
+	int i, j, k;
+	int tcase = 1;
+	while( gets(str) )
+	{
+	   if( str[0] == '-' ) break;
+	   for(i=0; i<90; i++)
+		pile[i] = 0;
+	   pile_pos = 45;
+	   index = 0;
+	   i = 0;
+	   tmp = 0;
+	   p = strtok( str, " " );
+	   tree[i++] = atoi(p);
+	   while( p = strtok( NULL, " ") )
+			tree[i++] = atoi(p);
+	   flg = 1;
+	   max = i-1;
+	   check( 0 );
+	   while(flg == 0)
+	   {
+		gets(str);
+		tmp = 0;
+		p = strtok( str, " " );
+		tree[i++] = atoi(p);
+		while(p = strtok( NULL, " ") )
+				tree[i++] = atoi(p);
+		flg = 1;
+		max= i-1;
+		check(0);
+	    }
+
+	/*
+	for(j=0; j<i; j++)
+		printf("%d ",tree[j]);
+	printf("\n");
+	check point
+	*/
+
+	call(index);
+
+	printf("Case %d:\n", tcase);
+	tcase++;
+	for(i=0; pile[i]==0; i++) ;
+	for( ; pile[i+1]; i++)
+		printf("%d ",pile[i]);
+	printf("%d", pile[i]);
+	printf("\n\n");
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

@@ -1,0 +1,69 @@
+From apache@acm.uva.es Wed Mar  3 13:21:44 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i23CLhW26174
+	for <judge@juez.localnet>; Wed, 3 Mar 2004 13:21:43 +0100
+Received: by acm.localnet (Postfix)
+	id 8B7B5100C0; Wed,  3 Mar 2004 13:21:43 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 5626C100BF; Wed,  3 Mar 2004 13:21:43 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 492
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040303122143.5626C100BF@acm.localnet>
+Date: Wed,  3 Mar 2004 13:21:43 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 492 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.52 - CRC: B0A1B405 **/
+/** Date: 2004-03-03 13:21:43 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	char a[1000000], c;
+	int i;
+
+	while(gets(a))
+	{
+		for(i=0; a[i]; )
+		{
+			while((a[i]<65 || (a[i]>90 && a[i]<97) || a[i]>122) && a[i])
+			{
+				printf("%c",a[i]);
+				i++;
+			}
+
+			if(a[i])
+			{
+			if((a[i] == 'A' || a[i] == 'E' || a[i] == 'I' ||a[i] == 'O' || a[i] == 'U' || a[i] == 'a' || a[i] == 'e' || a[i] == 'i' || a[i] == 'o' || a[i] == 'u'))
+			{
+			   while(((a[i]>=65&&a[i]<=90)||(a[i]>=97&&a[i]<=123)) && a[i])
+			   {
+				printf("%c",a[i]);
+				i++;
+			   }
+			   printf("ay");
+			}
+			else
+			{
+				c = a[i];
+				i++;
+				while(((a[i]>=65&&a[i]<=90)||(a[i]>=97&&a[i]<=123)) && a[i])
+				{
+					printf("%c",a[i]);
+					i++;
+				}
+				printf("%cay",c);
+			}
+			}
+		}
+		printf("\n");
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

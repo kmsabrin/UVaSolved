@@ -1,0 +1,58 @@
+From apache@acm.uva.es Mon Sep 29 12:08:09 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h8TA89V18449
+	for <judge@juez.localnet>; Mon, 29 Sep 2003 12:08:09 +0200
+Received: by acm.localnet (Postfix)
+	id 0021810092; Mon, 29 Sep 2003 12:08:09 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id F23DB1009B; Mon, 29 Sep 2003 12:08:08 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10375
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030929100808.F23DB1009B@acm.localnet>
+Date: Mon, 29 Sep 2003 12:08:08 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10375 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.28.250 - CRC: 964B28D6 **/
+/** Date: 2003-09-29 12:08:08 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main(){
+	long double p,q,r,s,i,j,k,a,b;
+	while(scanf("%Lf %Lf %Lf %Lf",&p,&q,&r,&s)!=EOF){
+	a=p-q; b=r-s;
+
+	i=1;
+	if(q>=a) {
+		for(j=p;j>q;j--){
+		i=i*j;
+		if(a>1) { i=i/a; a--;}}
+		}
+	else {
+		for(j=p;j>a;j--){
+		i=i*j;
+		if(q>1) { i=i/q; q--; }}
+		}
+
+	k=1;
+	if(s>=b) {
+		for(j=r;j>s;j--){
+		k=k*j;
+		if(b>1) { k=k/b; b--; }}
+		}
+	else {
+		for(j=r;j>b;j--) {
+		k=k*j;
+		if(s>1) { k=k/s; s--; }}
+	     }
+
+       printf("%.5Lf\n",i/k);
+       }
+}
+
+
+@END_OF_SOURCE_CODE

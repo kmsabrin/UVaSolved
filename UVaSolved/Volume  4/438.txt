@@ -1,0 +1,39 @@
+From apache@acm.uva.es Thu Aug 28 02:48:56 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h7S0mtV10768
+	for <judge@juez.localnet>; Thu, 28 Aug 2003 02:48:55 +0200
+Received: by acm.localnet (Postfix)
+	id 934991008F; Thu, 28 Aug 2003 02:48:55 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 9167710093; Thu, 28 Aug 2003 02:48:55 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 438
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030828004855.9167710093@acm.localnet>
+Date: Thu, 28 Aug 2003 02:48:55 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 438 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.73 - CRC: 6A7E74AF **/
+/** Date: 2003-08-28 02:48:55 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+int main(){
+	double a,b,c,d,e,f,x,y,i,j,k,r;
+	while(scanf("%lf %lf %lf %lf %lf %lf",&a,&b,&c,&d,&e,&f)!=EOF){
+		x=(e-a)*(e-c)+(f-b)*(f-d);
+		y=(e-a)*(b-d)-(f-b)*(a-c);
+		i=(-(a+c)-x*(b-d)/y)/2.0;
+		j=(-(b+d)+x*(a-c)/y)/2.0;
+		k=(a*c)+(b*d)-x/y*(-a*(b-d)+b*(a-c));
+		r=sqrt(i*i+j*j-k);
+
+		printf("%.2lf\n",2.0*r*3.141592653589);
+	}
+	return 0;
+	}
+@END_OF_SOURCE_CODE

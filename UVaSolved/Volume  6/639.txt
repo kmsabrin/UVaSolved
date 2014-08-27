@@ -1,0 +1,130 @@
+From apache@acm.uva.es Mon Apr 12 06:12:27 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i3C4CRW30075
+	for <judge@juez.localnet>; Mon, 12 Apr 2004 06:12:27 +0200
+Received: by acm.localnet (Postfix)
+	id 65FC2109D1; Mon, 12 Apr 2004 06:12:27 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6278F109C1; Mon, 12 Apr 2004 06:12:27 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 639
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040412041227.6278F109C1@acm.localnet>
+Date: Mon, 12 Apr 2004 06:12:27 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 639 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.67 - CRC: 1741B1FF **/
+/** Date: 2004-04-12 06:12:27 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+//#include<conio.h>
+
+int  dimension, max_rook, counter;
+char board[4][4];
+
+int call(int row, int column);
+
+int main()
+{
+	int row, column;
+//	clrscr();
+//	freopen("always.in","r",stdin);
+//	freopen("output.out","w",stdout);
+	while(scanf("%d", &dimension) && dimension)
+	{
+	getchar();
+	for(row = 0; row < dimension; row++)
+		gets(board[row]);
+
+	max_rook = 0;
+	for(row = 0; row < dimension; row++)
+		for(column = 0; column < dimension; column++)
+			if(board[row][column] == '.')
+			{
+				counter = 0;
+			     //	printf("NEW START\n");
+				call(row, column);
+			}
+	printf("%d\n", max_rook);
+	}
+	return 0;
+}
+
+void show(){int i,j; printf("counter=%d\n",counter);for(i=0;i<dimension;i++){for(j=0;j<dimension;j++)printf("%c",board[i][j]);printf("\n");}printf("\n");};
+
+int call(int row, int column)
+{
+	int i, j, k, last, hold;
+	int temp[100];
+
+	// A ROOK HAS BEEN PLACED
+	// COUNTER IS INCREASED
+	// ALL THE ATTACAKABLE SQUARES ARE MARKED
+	hold = counter;
+	counter++;
+	if(counter > max_rook) max_rook = counter;
+	board[row][column] = 'R';
+//	show();
+	i = 0;
+	j = row - 1;
+	while(j >= 0 && board[j][column] != 'X')
+	{
+		if(board[j][column] == '.')
+		{
+		board[j][column] = 'a';
+		temp[i++] = j; temp[i++] = column;
+		}
+		j--;
+
+	}
+	j = row + 1;
+	while(j < dimension && board[j][column] != 'X')
+	{
+		if(board[j][column] == '.')
+		{
+		board[j][column] = 'a';
+		temp[i++] = j; temp[i++] = column;
+		}
+		j++;
+	}
+	j = column + 1;
+	while(j < dimension && board[row][j] != 'X')
+	{
+		if(board[row][j] == '.')
+		{
+		board[row][j] = 'a';
+		temp[i++] = row; temp[i++] = j;
+		}
+		j++;
+	}
+	j = column - 1;
+	while(j >= 0 && board[row][j] != 'X')
+	{
+		if(board[row][j] == '.')
+		{
+		board[row][j] = 'a';
+		temp[i++] = row; temp[i++] = j;
+		}
+		j--;
+	}
+	last = i;
+
+	// RECURSIVE PORTION
+	for(i = 0; i < dimension; i++)
+		for(j = 0; j < dimension; j++)
+			if(board[i][j] == '.')
+				call(i, j);
+
+	// UNDO WHAT HAVE BEEN DONE
+	board[row][column] ='.';
+	for(i = 0; i < last; i+=2)
+		board[temp[i]][temp[i+1]] = '.';
+	counter = hold;
+
+	return 0;
+}
+@END_OF_SOURCE_CODE

@@ -1,0 +1,114 @@
+From apache@acm.uva.es Tue Aug 31 04:41:22 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i7V2fMW00826
+	for <judge@juez.localnet>; Tue, 31 Aug 2004 04:41:22 +0200
+Received: by acm.localnet (Postfix)
+	id 8F55EFFDC; Tue, 31 Aug 2004 04:41:22 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 8AC10FFDB; Tue, 31 Aug 2004 04:41:22 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 725
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040831024122.8AC10FFDB@acm.localnet>
+Date: Tue, 31 Aug 2004 04:41:22 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 725 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.69 - CRC: 166322EA **/
+/** Date: 2004-08-31 04:41:22 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	long i, j, k, a, p[10], q, f, c, m = 0;
+
+	while(scanf("%ld",&a) && a)
+	{
+
+	c = 0;
+	if(m == 1) printf("\n"); m = 1;
+
+
+	for(i = 1000; i < 10000; ++i)
+	{
+		for(j = 0; j < 10; ++j) p[j] = 0;
+		f = 1; k = i;
+		while(k)
+		{
+			q = k % 10;
+			// since its 4 digit already has a 0
+			if(q == 0)   { f = 0; break; }
+			p[q]++;
+			if(p[q] > 1) { f = 0; break; }
+			k /= 10;
+		}
+		if(f == 0) continue;
+
+		k = i * a;
+		if(k < 10000)  continue;
+		if(k > 99999)  break;
+		while(k)
+		{
+			q = k % 10;
+			// denominator has a 0
+			if(q == 0)   { f = 0; break; }
+			p[q]++;
+			if(p[q] > 1) { f = 0; break; }
+			k /= 10;
+		}
+		if(f == 0) continue;
+		else
+		{
+			printf("%ld / 0%ld = %ld\n", i * a, i, a);
+			c++;
+		}
+
+	}
+
+	for(i = 10000; i < 100000; ++i)
+	{
+		for(j = 0; j < 10; ++j) p[j] = 0;
+		f = 1;   k = i;
+		while(k)
+		{
+			q = k % 10;
+			p[q]++;
+			if(p[q] > 1) { f = 0; break; }
+			k /= 10;
+		}
+		if(f == 0) continue;
+
+		k = i * a;
+		if(k > 99999)  break;
+		while(k)
+		{
+			q = k % 10;
+			p[q]++;
+			if(p[q] > 1) { f = 0; break; }
+			k /= 10;
+		}
+		if(f == 0) continue;
+		else
+		{
+			printf("%ld / %ld = %ld\n", i * a, i, a);
+			c++;
+		}
+
+	}
+
+	if(c == 0) printf("There are no solutions for %ld.\n",a);
+
+
+	}
+
+	return 0;
+}
+
+
+
+
+@END_OF_SOURCE_CODE

@@ -1,0 +1,33 @@
+To: judge@acm.uva.es
+Subject: Problem 10323
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140148.6E26CFF81@acm.localnet>
+Date: Fri, 17 Oct 2003 16:01:48 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10323 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.65 - CRC: A382696C **/
+/** Date: 2003-10-17 16:01:48 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+/* @judge_id:34620CA  10323  C++ */
+
+#include<stdio.h>
+int main(){
+ long a;
+ while(scanf("%ld",&a)!=EOF){
+   if(a<0&&(a%2)) printf("Overflow!\n");
+   else if(a<0&&(!(a%2))) printf("Underflow!\n");
+   else if(a>-1&&a<8)   printf("Underflow!\n");
+   else if(a>13)  printf("Overflow!\n");
+   else if(a==8)  printf("40320\n");
+   else if(a==9)  printf("362880\n");
+   else if(a==10) printf("3628800\n");
+   else if(a==11) printf("39916800\n");
+   else if(a==12) printf("479001600\n");
+   else           printf("6227020800\n");
+ }
+return 0;
+}
+@END_OF_SOURCE_CODE

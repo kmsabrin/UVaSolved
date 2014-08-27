@@ -1,0 +1,75 @@
+From apache@acm.uva.es Tue Aug 24 03:24:39 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i7O1OdW23970
+	for <judge@juez.localnet>; Tue, 24 Aug 2004 03:24:39 +0200
+Received: by acm.localnet (Postfix)
+	id 3FF8D1000E; Tue, 24 Aug 2004 03:24:39 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 3A73D10002; Tue, 24 Aug 2004 03:24:39 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10684
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040824012439.3A73D10002@acm.localnet>
+Date: Tue, 24 Aug 2004 03:24:39 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10684 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.57 - CRC: AC33238 **/
+/** Date: 2004-08-24 03:24:39 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main()
+{
+	char c[80], *p;
+	register int count, cur, hold;
+	int n, max;
+
+	while(scanf("%d", &n) && n)
+	{
+		getchar();
+
+		count = max = cur = 0;
+		while(count < n)
+		{
+			gets(c);
+
+			p = strtok(c, " ");
+			hold = atoi(p);
+			count++;
+			if(cur + hold > 0)
+				cur += hold;
+			else
+				cur = 0;
+			if( cur > max )
+				max = cur;
+
+			while(p = strtok(NULL, " "))
+			{
+				hold = atoi(p);
+				count++;
+				if(cur + hold > 0)
+					cur += hold;
+				else
+					cur = 0;
+				if( cur > max )
+					max = cur;
+			}
+		}
+
+		if(max > 0)
+			printf("The maximum winning streak is %d.\n",max);
+		else
+			printf("Losing streak.\n");
+
+	}
+	return 0;
+}
+
+
+@END_OF_SOURCE_CODE

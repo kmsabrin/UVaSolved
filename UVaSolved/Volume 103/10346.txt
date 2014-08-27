@@ -1,0 +1,40 @@
+From apache@acm.uva.es Thu Aug 28 02:52:26 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h7S0qQV13217
+	for <judge@juez.localnet>; Thu, 28 Aug 2003 02:52:26 +0200
+Received: by acm.localnet (Postfix)
+	id 1A2FD1008A; Thu, 28 Aug 2003 02:52:26 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 180B41008F; Thu, 28 Aug 2003 02:52:26 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10346
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030828005226.180B41008F@acm.localnet>
+Date: Thu, 28 Aug 2003 02:52:26 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10346 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.73 - CRC: F81FA389 **/
+/** Date: 2003-08-28 02:52:26 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+/* @judge_id:34620CA 10346 C++ */
+#include<stdio.h>
+int main(){
+   unsigned long p,q,s,b,n,k;
+   while(scanf("%lu %lu",&s,&b)!=EOF){
+   n=s;
+   while(s/b){
+	p=(s%b);
+	q=s/b;
+	n=n+q;
+	s=p+q;
+	}
+   printf("%lu\n",n);
+   }
+   return 0;
+}
+
+@END_OF_SOURCE_CODE

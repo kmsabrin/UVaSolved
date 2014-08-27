@@ -1,0 +1,44 @@
+From apache@acm.uva.es Thu Feb 19 11:54:35 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i1JAsYW31866
+	for <judge@juez.localnet>; Thu, 19 Feb 2004 11:54:34 +0100
+Received: by acm.localnet (Postfix)
+	id B81F3FFF2; Thu, 19 Feb 2004 11:54:34 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id B5FAEFFBD; Thu, 19 Feb 2004 11:54:34 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10209
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040219105434.B5FAEFFBD@acm.localnet>
+Date: Thu, 19 Feb 2004 11:54:34 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10209 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.26.241 - CRC: 33DE14A8 **/
+/** Date: 2004-02-19 11:54:34 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+	long double pi,x,A1,A2,A3,R;
+	pi=acos(-1);
+ 	x=1-sqrt(3)/4-pi/6;
+   
+	while(scanf("%Lf",&R)!=EOF)
+   {
+      R*=R;
+   	A3=4*R*x;
+      A2=4*(R*(1-pi/4)-A3/2);
+      A1=pi*R/4-3*A2/4-A3/2;
+
+      printf("%.3Lf %.3Lf %.3Lf\n",A1,A2,A3);
+   }
+   return 0;
+}
+
+
+@END_OF_SOURCE_CODE

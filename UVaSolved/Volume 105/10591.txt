@@ -1,0 +1,60 @@
+From apache@acm.uva.es Thu Mar 11 06:56:30 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2B5uTW05384
+	for <judge@juez.localnet>; Thu, 11 Mar 2004 06:56:29 +0100
+Received: by acm.localnet (Postfix)
+	id E4EC3FFA5; Thu, 11 Mar 2004 06:56:29 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id E2D42FF7A; Thu, 11 Mar 2004 06:56:29 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10591
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040311055629.E2D42FF7A@acm.localnet>
+Date: Thu, 11 Mar 2004 06:56:29 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10591 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.83 - CRC: 1E1F098B **/
+/** Date: 2004-03-11 06:56:29 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	char a[10000];
+	long i, j, k, n, m, p;
+	scanf("%ld",&k);
+	m = 1;
+	while(k)
+	{
+	scanf("%ld",&n);
+
+	for(i=0; i<10000; i++) a[i] = 0;
+	p=n;
+
+	printf("Case #%ld: ",m);
+	while(1)
+	{
+		j = 0;
+		while(n)
+		{
+			i = n % 10;
+			j += i*i;
+			n /= 10;
+		}
+		//printf("%d\t",j);
+		if(j == 1) { printf("%ld is a Happy number.\n", p); break; }
+		if(a[j] || j==p)   { printf("%ld is an Unhappy number.\n", p);   break; }
+		a[j] = 1;
+		n = j;
+	}
+	m++;
+	k--;
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

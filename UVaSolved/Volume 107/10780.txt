@@ -1,0 +1,99 @@
+From apache@acm.uva.es Wed Dec  1 07:29:43 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id iB16Thp27439
+	for <judge@juez.localnet>; Wed, 1 Dec 2004 07:29:43 +0100
+Received: by acm.localnet (Postfix)
+	id 2CA0D10213; Wed,  1 Dec 2004 07:29:43 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 29F66FFFC; Wed,  1 Dec 2004 07:29:43 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10780
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041201062943.29F66FFFC@acm.localnet>
+Date: Wed,  1 Dec 2004 07:29:43 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10780 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.3.18 - CRC: 65915A10 **/
+/** Date: 2004-12-01 07:29:43 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#define MAX 5001
+char prime[MAX];
+
+int main()
+{
+	int i,j,cs,t,n,m,min,k,temp,x,y,pq[2501],z;
+
+	for(i = 2; i * i < MAX; ++i) {
+		if(!prime[i]) {
+			for(j = i * i; j < MAX; j += i)
+				prime[j] = 1;
+		}
+	}
+	pq[0] = 2;
+
+	for(i = 3,j = 1; i < 2500; i += 2) {
+		if(!prime[i]) {
+			pq[j++] = i;
+		}
+	}
+	cs = 0;
+	scanf("%d",&t);
+	while(t--) {
+		scanf("%d %d",&m,&n);
+		if(!prime[m]) {
+			if(m > n) {
+				min = 0;
+			}
+			else {
+				temp = 0;
+				z = m;
+				while(n/z) {
+					temp += n/z;
+					z *= m;
+				}
+				min = temp;
+			}
+		}
+		else {
+			k = m;
+			min = -1;
+			for(i = 0; i < j; ++i) {
+				y = pq[i];
+				if(!(k % y)) {
+					x = 0;
+					while(!(k%y)) {
+					   x++;
+					   k /= y;
+					}
+					temp = 0;
+					z = y;
+					while(n/z) {
+						temp += n/z;
+						z *= y;
+					}
+					if(temp < x) {
+						min = 0;
+						break;
+					}
+					temp /= x;
+					if(temp < min || min == -1)
+						min = temp;
+					if(k == 1)
+						break;
+				}
+			}
+		}
+		printf("Case %d:\n",++cs);
+		if(min)
+			printf("%d\n",min);
+		else
+			printf("Impossible to divide\n");
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

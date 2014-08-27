@@ -1,0 +1,96 @@
+From apache@acm.uva.es Thu Oct  7 18:07:26 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i97G7QW32256
+	for <judge@juez.localnet>; Thu, 7 Oct 2004 18:07:26 +0200
+Received: by acm.localnet (Postfix)
+	id 2D93610EE5; Thu,  7 Oct 2004 18:07:26 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 286D810EE3; Thu,  7 Oct 2004 18:07:26 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 300
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041007160726.286D810EE3@acm.localnet>
+Date: Thu,  7 Oct 2004 18:07:26 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 300 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.35 - CRC: BEF215AD **/
+/** Date: 2004-10-07 18:07:26 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main()
+{
+	char reg[][20]  ={ "pop", "no", "zip","zotz", "tzec", "xul", "yoxkin", "mol", "chen", "yax", "zac", "ceh", "mac", "kankin", "muan", "pax", "koyab", "cumhu", "uayet"};
+	char holy[][20] ={ "imix", "ik", "akbal" ,"kan", "chicchan", "cimi" ,"manik", "lamat" ,"muluk", "ok", "chuen", "eb", "ben", "ix", "mem" , "cib", "caban", "eznab", "canac", "ahau"};
+	char inp[20];
+	char month[10];
+	long i, j, k, r, s, day, year, d1, y1, m1, c;
+
+	c = atoi(gets(inp));
+	printf("%ld\n", c);
+	while(c)
+	{
+	gets(inp);
+
+	r=atoi(inp);
+
+	i=0;
+	while(inp[i] != '.') i++;
+
+	i+=2;
+	j=0;
+	while(inp[i] != ' ')
+	{
+		month[j] = inp[i];
+		i++; j++;
+	}
+	month[j] = '\0';
+
+	i++;
+	year = 0;
+	while(inp[i])
+	{
+		year = (year*10) + (inp[i]-48);
+		i++;
+	}
+	//printf("%ld\n%s\n%ld\n",r,month,year);
+	//checked;
+
+	for(i=0; i<19; i++)
+	{
+		if(!strcmp(reg[i], month))
+		{
+			s = i;
+			break;
+		}
+	}
+	s++;
+
+	day =  year * 365 + ( s - 1 ) * 20 + r + 1;
+
+	y1 = day / 260;
+	if( day % 260 == 0 && y1 != 0 ) y1--;
+
+//	printf( "%ld %ld ", day, y1 );
+	day = ( day % 260 );
+	d1 = day % 13;
+	if ( d1 == 0 ) d1 = 13;
+
+	m1 = day % 20;
+	if ( m1 == 0 ) m1 = 20;
+//	printf( "%ld %ld\n", d1, m1 );
+
+
+	printf("%ld %s %ld\n", d1, holy[m1-1], y1);
+	c--;
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

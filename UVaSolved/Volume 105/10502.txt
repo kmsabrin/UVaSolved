@@ -1,0 +1,55 @@
+From apache@acm.uva.es Sun Sep 19 03:38:55 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8J1ctW07685
+	for <judge@juez.localnet>; Sun, 19 Sep 2004 03:38:55 +0200
+Received: by acm.localnet (Postfix)
+	id 67FE610F9C; Sun, 19 Sep 2004 03:38:55 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6608B10F98; Sun, 19 Sep 2004 03:38:55 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10502
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040919013855.6608B10F98@acm.localnet>
+Date: Sun, 19 Sep 2004 03:38:55 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10502 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.106 - CRC: CEA79D51 **/
+/** Date: 2004-09-19 03:38:55 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int x1, x2, y1, y2, i, j, f, count, r, c;
+	char b[101][101];
+//	freopen("a.in","r",stdin);
+	while(scanf("%d", &r) && r)
+	{
+	scanf("%d", &c);
+	getchar();
+	for(i = 0; i < r; ++i)
+		gets(b[i]);
+	count = 0;
+	for(x1 = 0; x1 < r; ++x1)
+		for(y1 = 0; y1 < c; ++y1)
+			for(x2 = x1; x2 < r; ++x2)
+				for(y2 = y1; y2 < c; ++y2)
+				{
+					f = 1;
+					for(i = x1; i <= x2 && f; ++i)
+						for(j = y1; j <= y2 && f; ++j)
+							if(b[i][j] == 48)
+								f = 0;
+					if(f) count++;
+				}
+	printf("%d\n",count);
+	}
+	return 0;
+}
+
+
+@END_OF_SOURCE_CODE

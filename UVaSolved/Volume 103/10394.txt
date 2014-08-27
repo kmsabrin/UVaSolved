@@ -1,0 +1,53 @@
+From apache@acm.uva.es Wed Mar 10 13:41:54 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2ACfsW05508
+	for <judge@juez.localnet>; Wed, 10 Mar 2004 13:41:54 +0100
+Received: by acm.localnet (Postfix)
+	id 2717B10002; Wed, 10 Mar 2004 13:41:54 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 24C9CFF64; Wed, 10 Mar 2004 13:41:54 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10394
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040310124154.24C9CFF64@acm.localnet>
+Date: Wed, 10 Mar 2004 13:41:54 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10394 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.120 - CRC: A0119FC3 **/
+/** Date: 2004-03-10 13:41:54 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+
+#define max 20000000
+
+char p[max+1]={0};
+
+int main()
+{
+	long i,j,k;
+	long twin[1000000+1];
+
+
+	for(i=2; i*i<=max; i++)
+		if(!p[i])
+			for(j=i*i; j<=max; j+=i)
+				p[j]=1;
+
+	for(i=2,j=1; i<=max-2; i++)
+		if(!p[i] && !p[i+2])
+		{
+			twin[j] = i;
+			j++;
+		}
+
+	while(scanf("%ld",&k)!=EOF)
+	printf("(%ld, %ld)\n",twin[k],twin[k]+2);
+
+	return 0;
+}
+@END_OF_SOURCE_CODE

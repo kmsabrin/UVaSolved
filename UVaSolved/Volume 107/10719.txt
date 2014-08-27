@@ -1,0 +1,53 @@
+From apache@acm.uva.es Tue Sep 21 19:23:28 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8LHNSW07233
+	for <judge@juez.localnet>; Tue, 21 Sep 2004 19:23:28 +0200
+Received: by acm.localnet (Postfix)
+	id 1B2EC1101F; Tue, 21 Sep 2004 19:23:28 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 17EE71101C; Tue, 21 Sep 2004 19:23:28 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10719
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040921172328.17EE71101C@acm.localnet>
+Date: Tue, 21 Sep 2004 19:23:28 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10719 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.89 - CRC: C3D5BB51 **/
+/** Date: 2004-09-21 19:23:28 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int main()
+{
+	int coef[10010];
+	char str[100000], *p;
+	int b, t, k, i, j;
+	while(scanf("%d", &k) != EOF)
+	{
+		getchar();
+		gets(str);
+		i = 0;
+		p = strtok(str, " ");
+		coef[i++] = atoi(p);
+		while(p = strtok(NULL, " "))
+			coef[i++] = atoi(p);
+		printf("q(x):");
+		for(j = t = 0; j < i - 1; j++)
+		{
+			b = coef[j] - t;
+			t = b * k * -1;
+			printf(" %d",b);
+		}
+		printf("\nr = %d\n\n", coef[i - 1] - t);
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

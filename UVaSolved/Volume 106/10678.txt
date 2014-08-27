@@ -1,0 +1,44 @@
+From apache@acm.uva.es Fri Aug 27 12:12:18 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i7RACIW12004
+	for <judge@juez.localnet>; Fri, 27 Aug 2004 12:12:18 +0200
+Received: by acm.localnet (Postfix)
+	id DE5591001F; Fri, 27 Aug 2004 12:12:18 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id DACB2FFED; Fri, 27 Aug 2004 12:12:18 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10678
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040827101218.DACB2FFED@acm.localnet>
+Date: Fri, 27 Aug 2004 12:12:18 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10678 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.113 - CRC: 49579FC8 **/
+/** Date: 2004-08-27 12:12:18 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+	int st, a, b;
+	double pi, c, p, q, r, s;
+	pi = 2.0 * acos(0.0);
+	scanf("%d", &st);
+	while(st--)
+	{
+		scanf("%d %d", &a, &b);
+		p = a;
+		q = b;
+		r = (b - a)/2.0 + a / 2.0;
+		s = b*b/4.0 - a*a/4.0;
+		c = sqrt(s);
+		printf("%.3lf\n",pi*c*r);
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

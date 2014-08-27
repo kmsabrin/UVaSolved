@@ -1,0 +1,14 @@
+#include<stdio.h>
+
+int main()
+{
+	int m, n, cs = 1;
+	unsigned long long r;
+	while( scanf( "%d %d", &m, &n ) && ( m || n ) )
+	{
+		r = m * ( m - 1 ) / 2;
+		r *= n * ( n - 1 ) / 2;
+		printf( "Case %d: %llu\n", cs++, r );
+	}
+	return 0;
+}

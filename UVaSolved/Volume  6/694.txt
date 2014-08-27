@@ -1,0 +1,44 @@
+From apache@acm.uva.es Sat Oct 18 15:31:49 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9IDVmV14824
+	for <judge@juez.localnet>; Sat, 18 Oct 2003 15:31:48 +0200
+Received: by acm.localnet (Postfix)
+	id D5AB2FF9A; Sat, 18 Oct 2003 15:31:48 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id D3ACBFF9F; Sat, 18 Oct 2003 15:31:48 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 694
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031018133148.D3ACBFF9F@acm.localnet>
+Date: Sat, 18 Oct 2003 15:31:48 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 694 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.88 - CRC: F8091A79 **/
+/** Date: 2003-10-18 15:31:48 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main()
+{
+  long a,l,count,c;
+  unsigned long b;
+  c=1;
+  while(scanf("%ld %ld",&a,&l)==2){
+     if(a<0&&l<0) exit(0);
+	  count=1;
+	  b=a;
+	  while(b!=1){
+		  if (b%2) b=3*b+1;
+		  else b/=2;
+		  if(b>l) break;
+		  count++;
+		  }
+	  printf("Case %ld: A = %ld, limit = %ld, number of terms = %ld\n",c,a,l,count);
+	  c++;
+	  }
+  return 0;
+}
+@END_OF_SOURCE_CODE

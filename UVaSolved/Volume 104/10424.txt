@@ -1,0 +1,53 @@
+From apache@acm.uva.es Fri Oct 17 16:08:25 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE8OV01104
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:08:24 +0200
+Received: by acm.localnet (Postfix)
+	id 3EE72FF8B; Fri, 17 Oct 2003 16:08:25 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 3CF41FFB6; Fri, 17 Oct 2003 16:08:25 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10424
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140825.3CF41FFB6@acm.localnet>
+Date: Fri, 17 Oct 2003 16:08:25 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10424 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.85 - CRC: 5DBF4400 **/
+/** Date: 2003-10-17 16:08:25 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<ctype.h>
+int main(){
+	char a[30],b[30],c;
+	int i,j,k,r,s;
+	float f;
+/*	clrscr();     */
+	while(gets(a)&&a[0]!=EOF){
+	gets(b);
+	for(i=j=0;a[i];i++){
+		c=toupper(a[i]);
+		if(c<65||c>90) continue;
+		j+=(c-64);
+		}
+	for(i=k=0;b[i];i++){
+		c=toupper(b[i]);
+		if(c<65||c>90) continue;
+		k+=(c-64);
+		}
+/*	printf("%d %d",j,k);   */
+	while(j>9) { s=0;  while(j) { s+=(j%10); j/=10; } j=s; }
+	while(k>9) { r=0;  while(k) { r+=(k%10); k/=10; } k=r; }
+/*	printf("%d %d",s,r);   */
+	if(r>s) f=(float)s/(float)r;
+	else f=(float)r/(float)s;
+	printf("%.2f %%\n",f*100.0);
+	}
+}
+
+
+@END_OF_SOURCE_CODE

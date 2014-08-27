@@ -1,0 +1,83 @@
+From apache@acm.uva.es Wed Mar  2 17:21:31 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j22GLUl02004
+	for <judge@juez.localnet>; Wed, 2 Mar 2005 17:21:31 +0100
+Received: by acm.localnet (Postfix)
+	id BC8DB10B15; Wed,  2 Mar 2005 17:21:30 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id BAE9EFF7C; Wed,  2 Mar 2005 17:21:30 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10427
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050302162130.BAE9EFF7C@acm.localnet>
+Date: Wed,  2 Mar 2005 17:21:30 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10427 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.48 - CRC: 94F74D7D **/
+/** Date: 2005-03-02 17:21:30 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+
+long long reverse( long long p )
+{
+	long long i, j;
+	i = 0;
+	while ( p ) 
+	{
+		j = p % 10;
+		p /= 10;
+		i = i * 10 + j;
+	}
+	return i;
+}
+
+int main()
+{
+	long long a[] = { 0, 9, 189, 2889, 38889, 488889, 5888889, 68888889, 788888889 };
+	long long b[] = { 0, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
+	long long m, p, q, d, N;
+	long long i;
+
+	//freopen ( "input.in", "r", stdin );
+	while ( scanf ( "%lld", &N ) != EOF ) {
+
+	for ( i = 1; i < 9; ++i )
+		if ( N <= a[i] )
+			break;
+	
+	/*
+	if ( i == 9 )
+	{
+		printf( "out of bound\n" );
+		continue;
+	}
+	*/
+
+	if ( ( N - a[i - 1] ) % i == 0 )    // mTH NUMBER
+		m = ( N - a[i - 1] ) / i;
+	else
+		m = ( N - a[i - 1] ) / i + 1;
+	p = b[i] + m - 1 ;			   // WHICH IS p // b[i] is the first number
+	q = a[i - 1] + ( m - 1 ) * i + 1;  // FIRST DIGIT OF WHICH IS THE qTH DIGIT
+
+	// printf ( "%lld %lld\n", p, q );
+	p = reverse( p );
+	d = p % 10;
+	while ( q != N )
+	{
+		p /= 10;
+		d = p % 10;
+		++q;
+	}
+
+	printf( "%lld\n", d );
+	
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

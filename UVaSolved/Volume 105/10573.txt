@@ -1,0 +1,59 @@
+From apache@acm.uva.es Mon Mar  8 15:42:29 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i28EgSW24603
+	for <judge@juez.localnet>; Mon, 8 Mar 2004 15:42:28 +0100
+Received: by acm.localnet (Postfix)
+	id 4220910003; Mon,  8 Mar 2004 15:42:28 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id F1DC010002; Mon,  8 Mar 2004 15:42:27 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10573
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040308144227.F1DC010002@acm.localnet>
+Date: Mon,  8 Mar 2004 15:42:27 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10573 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.50 - CRC: 60111CC6 **/
+/** Date: 2004-03-08 15:42:27 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int main()
+{
+	int n,r1,r2,i;
+	double pi;
+	char c[10];
+	pi = 2.0 * acos(0.0);
+	n = atoi(gets(c));
+	while(n)
+	{
+		gets(c);
+		r1 = r2 = 0;
+		i = 0;
+		while(c[i] != ' ' && c[i]){
+			r1 = (r1*10) + (c[i]-48);
+			i++;
+		}
+		if(!c[i])
+		{
+			printf("%.4f\n",(pi*r1*r1)/8.0);
+			//printf("Impossible\n");
+			n--;
+			continue;
+		}
+		i++;
+		while(c[i] != ' ' && c[i]){
+			r2 = (r2*10) + (c[i]-48);
+			i++;
+		}
+		printf("%.4f\n",pi*((r1+r2)*(r1+r2) - r1*r1 - r2*r2));
+		n--;
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

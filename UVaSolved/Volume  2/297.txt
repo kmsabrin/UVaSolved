@@ -1,0 +1,155 @@
+From apache@acm.uva.es Tue Apr  6 19:15:20 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i36HFKW03980
+	for <judge@juez.localnet>; Tue, 6 Apr 2004 19:15:20 +0200
+Received: by acm.localnet (Postfix)
+	id 53898100CA; Tue,  6 Apr 2004 19:15:20 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 50E6EFFFC; Tue,  6 Apr 2004 19:15:20 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 297
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040406171520.50E6EFFFC@acm.localnet>
+Date: Tue,  6 Apr 2004 19:15:20 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 297 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.49 - CRC: 56208D1 **/
+/** Date: 2004-04-06 19:15:20 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+//#include<conio.h>
+
+int  count, track;
+int  b[33][33];
+char a[20000];
+
+int rec(int left, int top, int right, int bottom)
+{
+	int i, j;
+
+	//printf("l=%d t=%d r=%d b=%d\n",left,top,right,bottom);
+	if(a[count] == 'p')
+	{
+		count++;
+		rec((right+left)/2+1, top, right, (top+bottom)/2);
+	}
+	else if(a[count] == 'f')
+	{
+	  //	printf("working at count %d\n",count);
+		for(i=top; i<=(top+bottom)/2; i++)
+			for(j=(right+left)/2+1; j<=right; j++)
+				b[i][j] = 1;
+	}
+	++count;
+
+
+	if(a[count] == 'p')
+	{
+		count++;
+		rec(left, top, (right+left)/2,( bottom+top)/2);
+	}
+	else if(a[count] == 'f')
+	{
+	    //	printf("working at count %d with l=%d t=%d r=%d b=%d",count,left, top, right/2, (bottom+top)/2+1);
+		for(i=top; i<=(top+bottom)/2; i++)
+			for(j=left; j<=(right+left)/2; j++){
+				b[i][j] = 1; track++;}// printf("track %d\n",track);
+	}
+	++count;
+
+	if(a[count] == 'p')
+	{
+		count++;
+		rec(left, (top+bottom)/2+1, (right+left)/2, bottom);
+	}
+	else if(a[count] == 'f')
+	{
+//		printf("working at count %d\n",count);
+		for(i=(top+bottom)/2+1; i<=bottom; i++)
+			for(j=left; j<=(right+left)/2; j++)
+				b[i][j] = 1;
+	}
+	++count;
+
+	if(a[count] == 'p')
+	{
+		count++;
+		rec((left+right)/2+1, (bottom+top)/2+1, right, bottom);
+	}
+	else if(a[count] == 'f')
+	{
+  //		printf("working at count %d  with l=%d t=%d r=%d b=%d\n",count,(left+right)/2+1, (bottom+top)/2+1, right, bottom);
+		for(i=(bottom+top)/2+1; i<=bottom; i++)
+			for(j=(right+left)/2+1; j<=right; j++){
+					b[i][j] = 1;track++;}// printf("track %d\n",track);
+	}
+	//count++;
+
+	return 0;
+}
+
+void init()
+{
+	int i,j;
+	track = 0;
+	for(i=1; i<=32; i++)
+		for(j=1; j<=32; j++)
+			b[i][j] = 0;
+}
+
+
+void init2()
+{
+	int i,j;
+	for(i=1; i<=32; i++)
+		for(j=1; j<=32; j++)
+			b[i][j] = 1;
+}
+
+int main()
+{
+	int i, j, k, n;
+  //	clrscr();
+       //freopen("always.in","r",stdin);
+	scanf("%d", &n);
+	getchar();
+	while(n)
+	{
+	init();
+
+	gets(a);
+	count = 0;
+	if(a[count] == 'p')
+	{
+		++count;
+		rec(1,1,32,32);
+	}
+	else if(a[count] == 'f')
+		init2();
+
+	gets(a);
+	count = 0;
+	if(a[count] == 'p')
+	{
+		++count;
+		rec(1,1,32,32);
+	}
+	else if(a[count] == 'f')
+		init2();
+
+
+	k = 0;
+	for(i=1; i<=32; i++)
+		for(j=1; j<=32; j++)
+			if(b[i][j] == 1)
+				k++;
+	printf("There are %d black pixels.\n",k);
+	n--;
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

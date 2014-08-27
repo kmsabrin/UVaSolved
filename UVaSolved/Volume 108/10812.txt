@@ -1,0 +1,53 @@
+From apache@acm.uva.es Tue Feb 15 04:28:48 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1F3Sml03641
+	for <judge@juez.localnet>; Tue, 15 Feb 2005 04:28:48 +0100
+Received: by acm.localnet (Postfix)
+	id 6FD521137F; Tue, 15 Feb 2005 04:28:48 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6DB9E11375; Tue, 15 Feb 2005 04:28:48 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10812
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050215032848.6DB9E11375@acm.localnet>
+Date: Tue, 15 Feb 2005 04:28:48 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10812 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.43 - CRC: 11F72FC4 **/
+/** Date: 2005-02-15 04:28:48 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int s, d, t, a, b;
+	scanf( "%d", &t );
+	while( t-- )
+	{
+		scanf( "%d %d", &s, &d );
+		if( s < d )
+			printf( "impossible" );
+		else if( ( s + d ) % 2 )
+			printf( "impossible" );
+		else
+		{
+			a = ( s + d ) / 2;
+			b = s - a;
+			if ( a < b )
+				printf( "%d %d", b, a );
+			else
+				printf( "%d %d", a, b );
+		}
+		printf( "\n" );
+	}
+	return 0;
+}
+
+
+
+
+@END_OF_SOURCE_CODE

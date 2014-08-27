@@ -1,0 +1,68 @@
+From apache@acm.uva.es Fri Jan 14 04:02:51 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j0E32nl15350
+	for <judge@juez.localnet>; Fri, 14 Jan 2005 04:02:49 +0100
+Received: by acm.localnet (Postfix)
+	id 4A55210B1D; Fri, 14 Jan 2005 04:02:51 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 46D8BFFE1; Fri, 14 Jan 2005 04:02:51 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10446
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050114030251.46D8BFFE1@acm.localnet>
+Date: Fri, 14 Jan 2005 04:02:51 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10446 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.52 - CRC: C62A315C **/
+/** Date: 2005-01-14 04:02:51 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+unsigned long long arr[61][62], count;
+
+int func( int n, int back )
+{
+	int i;
+	
+	if ( n <= 1 )  { ++count; return 0; }
+	
+	if ( arr[n][back] ) 
+	{
+		count += arr[n][back]; return 0;
+	}
+	else ++count;
+
+	for ( i = 1; i <= back; ++i )
+		func( n - i, back );
+	
+	return 0;
+}
+
+
+int main()
+{
+	int i, j, c = 1;
+	for ( i = 0; i <= 60; ++i )
+		for ( j = 0; j <= 61; ++j )
+		{
+			count = 0;
+			func( i, j );
+			arr[i][j] = count;
+		}
+	while ( scanf( "%d %d", &i, &j ) )
+	{
+		if ( i > 60 ) break;
+		printf( "Case %d: ", c++ );
+		if ( i < 0 ) printf( "1\n" );
+		else printf( "%llu\n", arr[i][j] );
+	}
+	return 0;
+}
+
+
+
+@END_OF_SOURCE_CODE

@@ -1,0 +1,63 @@
+From apache@acm.uva.es Mon Dec  1 05:33:18 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hB14XIW18746
+	for <judge@juez.localnet>; Mon, 1 Dec 2003 05:33:18 +0100
+Received: by acm.localnet (Postfix)
+	id 3AA36FF90; Mon,  1 Dec 2003 05:33:18 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 3872BFF91; Mon,  1 Dec 2003 05:33:18 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 490
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031201043318.3872BFF91@acm.localnet>
+Date: Mon,  1 Dec 2003 05:33:18 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 490 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.29.251 - CRC: 1BFCE476 **/
+/** Date: 2003-12-01 05:33:18 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+
+
+int main()
+{
+	char a[100][100]={'\0'};
+	int i,j,k,f,d,maxd;
+
+   for(i=0;i<100;i++)
+   {
+   	/*if(*/gets(a[i]);
+      /*{
+      	d=strlen(a[i]);
+      	if(d>maxd)
+      		maxd=d;
+      }
+      else
+      {
+      	k=i-1;
+         break;
+      } */
+   }
+   /*printf("\n%d\n",maxd);*/
+   for(i=0;i<100;i++)
+   {
+   	for(j=99;j>=0;j--)
+      {
+         /*if(!(a[k][i]))
+         	k=k-1; */
+        if(a[j][i])
+      		printf("%c",a[j][i]);
+      }
+      printf("\n");
+   }
+
+
+   return 0;
+
+}
+@END_OF_SOURCE_CODE

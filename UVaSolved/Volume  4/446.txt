@@ -1,0 +1,46 @@
+From apache@acm.uva.es Fri Oct 17 16:07:55 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE7tV00721
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:07:55 +0200
+Received: by acm.localnet (Postfix)
+	id BC466FF88; Fri, 17 Oct 2003 16:07:55 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id BA488FF89; Fri, 17 Oct 2003 16:07:55 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 446
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140755.BA488FF89@acm.localnet>
+Date: Fri, 17 Oct 2003 16:07:55 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 446 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.85 - CRC: C059B98F **/
+/** Date: 2003-10-17 16:07:55 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+int main(){
+	char c;
+	int i,j,k,p,q,m,a[13],b[13];
+	scanf("%d",&q);
+	while(q){
+		scanf("%x %c %x",&i,&c,&j);
+		if(c=='+') k=i+j;
+		else       k=i-j;
+		for(m=0;m<13;m++)  a[m]=b[m]=0;
+		m=0;
+		while(i) { p=i%2; a[m++]=p; i/=2; }
+		for(m=12;m>-1;m--) printf("%d",a[m]);
+		printf(" %c ",c);
+		m=0;
+		while(j) { p=j%2; b[m++]=p; j/=2; }
+		for(m=12;m>-1;m--) printf("%d",b[m]);
+		printf(" = %d\n",k);
+		q--;
+		}
+	 return 0;
+	}
+
+@END_OF_SOURCE_CODE

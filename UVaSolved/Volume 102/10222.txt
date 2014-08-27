@@ -1,0 +1,36 @@
+From apache@acm.uva.es Thu Sep 25 15:13:34 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h8PDDYV19541
+	for <judge@juez.localnet>; Thu, 25 Sep 2003 15:13:34 +0200
+Received: by acm.localnet (Postfix)
+	id 1B15410084; Thu, 25 Sep 2003 15:13:34 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 18E8110095; Thu, 25 Sep 2003 15:13:34 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10222
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030925131334.18E8110095@acm.localnet>
+Date: Thu, 25 Sep 2003 15:13:34 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10222 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.78 - CRC: C87F0BE0 **/
+/** Date: 2003-09-25 15:13:34 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+
+#include<stdio.h>
+#include<ctype.h>
+int main(){
+	char c[]={ '1','2','3','4','5','6','7','8','9','0','-','=','\\','q','w','e','r','t','y','u','i','o','p','[',']','a','s','d','f','g','h','j','k','l',';','\'','z','x','c','v','b','n','m',',','.','/'};
+	char str[2000];
+	int i,j,k;
+	gets(str);
+	for(i=0;str[i];i++)
+		for(j=0;c[j];j++)
+			if(tolower(str[i])==c[j]) { printf("%c",tolower(c[j-2])); break; }
+	return 0;
+}
+@END_OF_SOURCE_CODE

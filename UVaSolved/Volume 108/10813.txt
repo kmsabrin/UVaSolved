@@ -1,0 +1,127 @@
+From apache@acm.uva.es Wed Feb 16 06:04:45 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1G54jl12262
+	for <judge@juez.localnet>; Wed, 16 Feb 2005 06:04:45 +0100
+Received: by acm.localnet (Postfix)
+	id 94E2711221; Wed, 16 Feb 2005 06:04:45 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 9280710B2C; Wed, 16 Feb 2005 06:04:45 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10813
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050216050445.9280710B2C@acm.localnet>
+Date: Wed, 16 Feb 2005 06:04:45 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10813 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.56 - CRC: BE30BE01 **/
+/** Date: 2005-02-16 06:04:45 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+
+int bingo[5][5];
+
+void showbingo()
+{
+	int i, j;
+	for ( i = 0; i < 5; ++i )
+	{
+		for ( j = 0; j < 5; ++j )
+			printf ( "%d  ", bingo[i][j] );
+		printf( "\n" );
+	}
+	printf( "\n" );
+}
+
+int checkbingo()
+{
+//	showbingo();
+	int i, j, f;
+	for ( i = 0; i < 5; ++i )
+	{
+		f = 1;
+		for ( j = 0; j < 5; ++j )
+			if ( bingo[i][j] != -1 )
+			{
+				f = 0;
+				break;
+			}
+		if ( f ) return 1;
+	}
+	for ( j = 0; j < 5; ++j )
+	{
+		f = 1;
+		for ( i = 0; i < 5; ++i )
+			if ( bingo[i][j] != -1 )
+			{
+				f = 0;
+				break;
+			}
+		if ( f ) return 1;
+	}
+	for ( i = j = 0, f = 1; i < 5; ++i, ++j )
+		if ( bingo[i][j] != -1 )
+		{
+			f = 0;
+			break;
+		}
+		if ( f ) return 1;
+	for ( i = 4, j = 0, f = 1; j < 5; --i, ++j )
+		if ( bingo[i][j] != -1 )
+		{
+			f = 0;
+			break;
+		}
+		if ( f ) return 1;
+	return 0;
+}
+
+void putbingo( int k  )
+{
+	int i, j;
+	for ( i = 0; i < 5; ++i )
+		for ( j = 0; j < 5; ++j )
+			if ( bingo[i][j] == k )
+			{
+				bingo[i][j] = -1;
+				return;
+			}
+}
+int main()
+{
+	int i, j, k, f, t;
+	//freopen( "a.in", "r", stdin );
+	scanf( "%d", &t );
+	while( t-- )
+	{
+
+	//	freopen( "a.out", "w", stdout );
+	for ( i = 0; i < 5; ++i )
+		for ( j = 0; j < 5; ++j )
+		{
+			if ( i == 2 && j == 2 )
+			{
+				bingo[i][j] = -1;
+				continue;
+			}
+			scanf( "%d", &k );
+			bingo[i][j] = k;
+		}
+	for (i = 0, f = 1; i < 75; ++i )
+	{
+		scanf( "%d", &j );
+		putbingo( j );
+		if ( checkbingo() && f )
+		{
+			printf ( "BINGO after %d numbers announced\n", i + 1 );
+			f = 0;
+		}
+	}
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

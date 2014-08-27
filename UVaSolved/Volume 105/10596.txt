@@ -1,0 +1,53 @@
+From apache@acm.uva.es Wed Mar 10 14:26:24 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2ADQOW23928
+	for <judge@juez.localnet>; Wed, 10 Mar 2004 14:26:24 +0100
+Received: by acm.localnet (Postfix)
+	id 4FBE1FFF1; Wed, 10 Mar 2004 14:26:24 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 4D973FF84; Wed, 10 Mar 2004 14:26:24 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10596
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040310132624.4D973FF84@acm.localnet>
+Date: Wed, 10 Mar 2004 14:26:24 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10596 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.77 - CRC: B7606AE9 **/
+/** Date: 2004-03-10 14:26:24 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int i,j,k,n,r,v[205],c1,c2;
+	while(scanf("%d %d",&n,&r) != EOF)
+	{
+	k = r;
+	for(i=0; i<205; i++) v[i] = 0;
+	while(k)
+	{
+		scanf("%d %d", &c1, &c2);
+		v[c1]++;
+		v[c2]++;
+		k--;
+	}
+
+	j = 1;
+	for(i=0; i<n; i++)
+		if(v[i]%2 || !v[i])
+		{
+			j = 0;
+			break;
+		}
+	if(j) printf("Possible\n");
+	else  printf("Not Possible\n");
+
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

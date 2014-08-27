@@ -1,0 +1,72 @@
+From apache@acm.uva.es Wed Dec 24 15:28:29 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hBOESTW02397
+	for <judge@juez.localnet>; Wed, 24 Dec 2003 15:28:29 +0100
+Received: by acm.localnet (Postfix)
+	id 04E271001A; Wed, 24 Dec 2003 15:28:33 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 033971001B; Wed, 24 Dec 2003 15:28:33 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 151
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031224142833.033971001B@acm.localnet>
+Date: Wed, 24 Dec 2003 15:28:33 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 151 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.87 - CRC: 1BE157A **/
+/** Date: 2003-12-24 15:28:32 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int i,j,k,f,c,d,a[111];
+	while(scanf("%d",&d)&&d)
+   {
+   	for(k=1; ;++k)
+   	{
+   		for(i=2;i<100;i++) a[i]=-1;
+      	a[1]=0;
+      	c=d-2;
+      	f=1;
+      	i=0;
+      	while(c)
+      	{
+         	j=0;
+         	while(j!=k)
+         	{
+            	if(i==d)
+            		i=0;
+         		++i;
+            	if(a[i])
+            		++j;
+         	}
+
+         	/*printf("%d\n",i);*/
+         	if(i==13)
+         	{
+            	f=0;
+         		break;
+         	}
+
+         	a[i]=0;
+         	if(i==d)
+            	i=0;
+
+         	--c;
+      	}
+
+      	if(f)
+      	{
+      		printf("%d\n",k);
+         	break;
+      	}
+   	}
+   }
+   return 0;
+}
+@END_OF_SOURCE_CODE

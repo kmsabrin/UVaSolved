@@ -1,0 +1,45 @@
+From apache@acm.uva.es Fri Oct 17 16:07:12 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE7CV32724
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:07:12 +0200
+Received: by acm.localnet (Postfix)
+	id 95698FF7E; Fri, 17 Oct 2003 16:07:12 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 935A2FF84; Fri, 17 Oct 2003 16:07:12 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 294
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140712.935A2FF84@acm.localnet>
+Date: Fri, 17 Oct 2003 16:07:12 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 294 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.85 - CRC: 2CBCC810 **/
+/** Date: 2003-10-17 16:07:12 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<math.h>
+int main(){
+	long a,b,n,i,p,j,k,max;
+	scanf("%ld",&n);
+	while(n){
+		scanf("%ld %ld",&a,&b);
+		max=0;
+		for(k=a;k<=b;k++){
+			j=2;
+			for(i=2;i<=sqrt((double)k);i++)
+				if(!(k%i)) j+=2;
+			i--;
+			if(i*i==k) j--;
+			if(j>max) { max=j; p=k; }
+			}
+
+		printf("Between %ld and %ld, %ld has a maximum of %ld divisors.\n",a,b,p,max);
+		n--;
+		}
+}
+
+@END_OF_SOURCE_CODE

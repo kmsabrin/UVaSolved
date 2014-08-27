@@ -1,0 +1,49 @@
+From apache@acm.uva.es Tue Oct 12 12:43:22 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i9CAhLW08510
+	for <judge@juez.localnet>; Tue, 12 Oct 2004 12:43:21 +0200
+Received: by acm.localnet (Postfix)
+	id 7738D10E9D; Tue, 12 Oct 2004 12:43:21 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6F8C110E9C; Tue, 12 Oct 2004 12:43:21 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10576
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041012104321.6F8C110E9C@acm.localnet>
+Date: Tue, 12 Oct 2004 12:43:21 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10576 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.52 - CRC: 22B452F8 **/
+/** Date: 2004-10-12 12:43:21 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+
+int main()
+{
+	long s, d;
+	long i, j, k, x, y, f; 
+	while ( scanf("%ld %ld", &s, &d) != EOF )
+	{
+		for ( i = 1; i <= 5; ++i )
+		{
+			j = s * ( 5 - i );
+			k = d * i;
+			if ( k >= j ) { x = 5 - i; y = i; break; }
+		}
+
+		if ( x == 4 && y == 1 )      f = 10 * s -  2 * d;
+		else if ( x == 3 && y == 2 ) f =  8 * s -  4 * d;
+		else if ( x == 2 && y == 3 ) f =  6 * s -  6 * d;
+		else if ( x == 1 && y == 4 ) f =  3 * s -  9 * d;
+		else if ( x == 0 && y == 5 ) f = -1;
+
+		if ( f <= 0 )  printf( "Deficit\n" );
+		else 	       printf( "%ld\n", f );
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

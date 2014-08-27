@@ -1,0 +1,71 @@
+From apache@acm.uva.es Tue Mar  9 10:24:07 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i299O7W25934
+	for <judge@juez.localnet>; Tue, 9 Mar 2004 10:24:07 +0100
+Received: by acm.localnet (Postfix)
+	id 5660A10009; Tue,  9 Mar 2004 10:24:07 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 53F3710002; Tue,  9 Mar 2004 10:24:07 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 324
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040309092407.53F3710002@acm.localnet>
+Date: Tue,  9 Mar 2004 10:24:07 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 324 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.90 - CRC: 65B6005E **/
+/** Date: 2004-03-09 10:24:06 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	int a[1111], b[10];
+	int i,j,k,r,s,n,carry;
+
+	while(scanf("%d",&n) && n)
+	{
+	for(i=0; i<1111; i++)
+		a[i] = -1;
+	for(i=0; i<10; i++)
+		b[i] = 0;
+	a[0] = 2;
+	for(i=3; i<=n; i++)
+	{
+		carry = 0;
+		for(j=0; a[j]!=-1; j++)
+		{
+			k = a[j] * i + carry;
+			a[j] = k % 10;
+			if(k>9)
+				carry = k / 10;
+			else
+				carry = 0;
+			//printf("%d %d\n",a[j],carry);
+		}
+		if(carry)
+		{
+			while(carry)
+			{
+				a[j] = carry % 10;
+				carry /= 10;
+				j++;
+			}
+		}
+	}
+	for(i=1111-1; a[i] == -1; i--);
+	for( ; i > -1; i--)
+		b[a[i]]++;
+	if(n == 1) {b[0]=b[2]=b[3]=b[4]=b[5]=b[6]=b[7]=b[8]=b[9]=0; b[1]=1;}
+	printf("%d! --\n",n);
+	printf("   (0)%4d   (1)%4d   (2)%4d   (3)%4d   (4)%4d\n",b[0],b[1],b[2],b[3],b[4]);
+	printf("   (5)%4d   (6)%4d   (7)%4d   (8)%4d   (9)%4d\n",b[5],b[6],b[7],b[8],b[9]);
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

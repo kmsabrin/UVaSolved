@@ -1,0 +1,104 @@
+From apache@acm.uva.es Tue Feb 22 17:33:57 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1MGXvl13039
+	for <judge@juez.localnet>; Tue, 22 Feb 2005 17:33:57 +0100
+Received: by acm.localnet (Postfix)
+	id 25F16112E6; Tue, 22 Feb 2005 17:33:57 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 21AACFFC3; Tue, 22 Feb 2005 17:33:57 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10258
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050222163357.21AACFFC3@acm.localnet>
+Date: Tue, 22 Feb 2005 17:33:57 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10258 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.61 - CRC: ECE5FF03 **/
+/** Date: 2005-02-22 17:33:57 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+//#include <conio.h>
+
+int main()
+{
+	char str[100];
+	int solved[110], penalty[110], submitted[110];
+	int submission[110][11], done[110][11];
+	int contestant, problem, time, tc;
+	int i, j, max, min_pen;
+	char c;
+//	clrscr();
+//	freopen( "a.in", "r", stdin );
+	scanf( "%d", &tc ); getchar(); getchar();
+	while( tc-- )
+	{
+	memset( solved, 0, sizeof( solved ) );
+	memset( submitted, 0, sizeof( submitted ) );
+	memset( submission, 0, sizeof( submission ) );
+	memset( penalty, 0, sizeof( penalty ) );
+	memset( done, 0, sizeof( done ) );
+	while ( gets( str ) && *str )
+	{
+
+	sscanf( str, "%d %d %d %c", &contestant, &problem, &time, &c );
+	if ( c == 'C' )
+	{
+		if ( done[contestant][problem] )
+			continue;
+		done[contestant][problem] = 1;
+		solved[contestant]++;
+		penalty[contestant] += submission[contestant][problem] * 20 + time;
+		submitted[contestant] = 1;
+	}
+	if ( c == 'I' )
+	{
+		submission[contestant][problem]++;
+		submitted[contestant] = 1;
+	}
+	submitted[contestant] = 1;
+	}
+
+	for( i = 1; i < 110; ++i )
+	{
+		contestant = -1;
+		for ( j = 1, max = 0, min_pen = 100000; j < 110; ++j )
+			if ( submitted[j] && solved[j] != -1 )
+			{
+
+				if ( solved[j] > max )
+				{
+					max = solved[j];
+					min_pen = penalty[j];
+					contestant = j;
+				}
+				if ( solved[j] == max && penalty[j] < min_pen )
+				{
+					max = solved[j];
+					min_pen = penalty[j];
+					contestant = j;
+				}
+			}
+		if ( contestant != -1 )
+		{
+			printf( "%d %d %d\n", contestant ,solved[contestant], penalty[contestant] );
+			solved[contestant] = -1;
+		}
+	}
+	for ( i = 1; i < 101; ++i )
+		if ( submitted[i] && solved[i] != -1 )
+			printf( "%d %d %d\n", i ,solved[i], penalty[i] );
+
+	if ( tc ) printf( "\n" );
+	}
+
+	return 0;
+}
+
+
+
+@END_OF_SOURCE_CODE

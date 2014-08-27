@@ -1,0 +1,80 @@
+From apache@acm.uva.es Thu Apr  1 12:37:32 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i31AbVW24346
+	for <judge@juez.localnet>; Thu, 1 Apr 2004 12:37:31 +0200
+Received: by acm.localnet (Postfix)
+	id 6F90A10049; Thu,  1 Apr 2004 12:37:31 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 6D4BD10004; Thu,  1 Apr 2004 12:37:31 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 784
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040401103731.6D4BD10004@acm.localnet>
+Date: Thu,  1 Apr 2004 12:37:31 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 784 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.29.251 - CRC: 32FCD3C6 **/
+/** Date: 2004-04-01 12:37:31 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+//#include<conio.h>
+
+char a[31][81];
+
+int paint(int r, int c)
+{
+	if(a[r][c] != ' ') return 0;
+	a[r][c] = '#';
+	paint(r-1,c);
+	paint(r+1,c);
+	paint(r,c-1);
+	paint(r,c+1);
+	return 0;
+}
+
+int main()
+{
+
+	int i,j,k,n,len,r,c,f,l2;
+	//clrscr();
+	//freopen("784.in","r",stdin);
+	scanf("%d",&n);
+	while(n)
+	{
+		i=0;
+		k=0;
+		while(1)
+		{
+			gets(a[i]);
+			if(a[i][0] == '_') { l2 = strlen(a[i]); break;}
+			len = strlen(a[i]);
+			k++;
+			i++;
+		}
+		f=1;
+		for(i=0;i<k&&f;i++)
+			for(j=0;j<len;j++)
+				if(a[i][j] == '*')
+					{ r=i;
+					  c=j;
+					  f=0;
+					  break;
+					 }
+		a[r][c] = '#';
+		paint(r+1,c);
+		for(i=0;i<k;i++)
+			puts(a[i]);
+
+		for(i=0;i<l2;i++)
+			printf("_");
+		printf("\n");
+		n--;
+		}
+		return 0;
+}
+@END_OF_SOURCE_CODE

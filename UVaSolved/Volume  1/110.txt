@@ -1,0 +1,167 @@
+From apache@acm.uva.es Sat Nov 27 05:03:05 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id iAR434d01611
+	for <judge@juez.localnet>; Sat, 27 Nov 2004 05:03:04 +0100
+Received: by acm.localnet (Postfix)
+	id D133810729; Sat, 27 Nov 2004 05:03:04 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id CF2C6FFF3; Sat, 27 Nov 2004 05:03:04 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 110
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041127040304.CF2C6FFF3@acm.localnet>
+Date: Sat, 27 Nov 2004 05:03:04 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 110 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.39 - CRC: 8C5370D4 **/
+/** Date: 2004-11-27 05:03:04 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+//#include <conio.h>
+
+char temp[10], str[10];
+int y, n;
+
+void Swap( int i, int j )
+{
+	int k;
+	k = temp[i];
+	temp[i] = temp[j];
+	temp[j] = k;
+}
+
+void PrintSpace( int i )
+{
+	while( i-- )
+		printf(" " );
+}
+
+void init()
+{
+	int i;
+	printf("program sort(input,output);\n");
+	printf("var\n");
+	for (i = 1; i <= n; ++i )
+	{
+		if ( i != n )
+			printf( "%c,", str[i] );
+		else
+			printf( "%c ", str[i] );
+	}
+	printf(": integer;\n");
+	printf("begin\n");
+	printf("  readln(");
+	for (i = 1; i <= n; ++i )
+	{
+		if ( i != n )
+			printf( "%c,", str[i] );
+		else
+			printf( "%c);\n", str[i] );
+	}
+}
+
+void PrintString()
+{
+	int i;
+	PrintSpace( 2 *  n );
+	printf("writeln(");
+	for ( i = 1; i <= n; ++i )
+	{
+		if ( i != n )
+			printf( "%c,", str[temp[i]] );
+		else
+			printf( "%c)\n", str[temp[n]] );
+	}
+}
+
+int call( int x )
+{
+	int i, h;
+	char  tmp_str[10];
+	y = x;
+	for ( i = 1; i <= x; ++i )
+	{
+		if ( i == 1 )
+		{
+			temp[y] = x;
+			PrintSpace( 2 * ( x - 1 ) );
+			printf( "if %c < %c then\n", str[temp[y - 1]], str[temp[y]] );
+			if ( x == n )
+				PrintString();
+			else
+			{
+				h = y;
+				strcpy( tmp_str, temp );
+				call( x + 1 );
+				y = h;
+				strcpy( temp, tmp_str );
+			}
+		}
+		else if ( i == x )
+		{
+			Swap( y, y - 1 );
+			PrintSpace( 2 * ( x - 1 ) );
+			printf( "else\n" );
+			if ( x == n )
+				PrintString();
+			else
+			{
+				h = y;
+				strcpy( tmp_str, temp );
+				call( x + 1 );
+				y = h;
+				strcpy( temp, tmp_str );
+			}
+		}
+		else
+		{
+			Swap( y, y - 1 );
+			y--;
+			PrintSpace( 2 * ( x - 1 ) );
+			printf( "else if %c < %c then\n", str[temp[y -1]], str[temp[y]] );
+			if ( x == n )
+				PrintString();
+			else
+			{
+				h = y;
+				strcpy( tmp_str, temp );
+				call( x + 1 );
+				y = h;
+				strcpy( temp, tmp_str );
+			}
+		}
+	}
+	return 0;
+}
+
+int main()
+{
+	int i, t;
+	temp[0] = 1; // a non-zero value for strcpy to work correctly
+//	clrscr();
+//	freopen( "a.in", "r", stdin );
+//	freopen( "b.in", "w", stdout );
+	scanf("%d", &t ); getchar(); getchar();
+
+while ( t-- )
+{
+	scanf( "%d", &n ); getchar();
+	for ( i = 1; i <= n; ++i )
+		str[i] = 96 + i;
+	temp[1] = 1;
+	init();
+	if ( n == 1 )
+		printf("  writeln(a)\n");
+	else
+		call( 2 );
+	printf("end.\n");
+	if ( t ) printf("\n");
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

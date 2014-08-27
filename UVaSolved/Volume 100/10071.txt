@@ -1,0 +1,34 @@
+From apache@acm.uva.es Fri Aug 15 03:19:25 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h7F1JPV18631
+	for <judge@juez.localnet>; Fri, 15 Aug 2003 03:19:25 +0200
+Received: by acm.localnet (Postfix)
+	id 0E83310096; Fri, 15 Aug 2003 03:19:25 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 0CB7C10097; Fri, 15 Aug 2003 03:19:25 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10071
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030815011925.0CB7C10097@acm.localnet>
+Date: Fri, 15 Aug 2003 03:19:25 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10071 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.50 - CRC: FA0E40BE **/
+/** Date: 2003-08-15 03:19:25 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+/* @JUDGE_ID 10071 C++ */
+
+#include<stdio.h>
+int main(void){
+ long a,b;
+ while(scanf("%ld %ld",&a,&b)!=EOF){
+ if(b<0||b>200||a<-100||a>100) continue;
+ printf("%ld\n",2*a*b);
+ }
+ return 0;
+}
+@END_OF_SOURCE_CODE

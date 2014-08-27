@@ -1,0 +1,87 @@
+From apache@acm.uva.es Wed May  5 11:14:15 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i459EEW08644
+	for <judge@juez.localnet>; Wed, 5 May 2004 11:14:15 +0200
+Received: by acm.localnet (Postfix)
+	id CF37711445; Wed,  5 May 2004 11:14:14 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id CCDF611432; Wed,  5 May 2004 11:14:14 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10646
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040505091414.CCDF611432@acm.localnet>
+Date: Wed,  5 May 2004 11:14:14 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10646 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.103 - CRC: B73D1588 **/
+/** Date: 2004-05-05 11:14:14 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+//#include <conio.h>
+int main()
+{
+	char card[55][5], tmp[5];
+	int sol[55];
+	int start, i, m, y, total, d, j, tcase, index;
+  //	clrscr();
+  //	freopen("always.in","r",stdin);
+
+
+	index=1;
+	scanf("%d", &tcase);
+	while(tcase--)
+	{
+	printf("Case %d: ",index);
+	index++;
+	for(i=0; i<52; i++)
+		sol[i] = 1;
+
+	for(i=0; i<52; i++)
+		scanf("%s", card[i]);
+	for(i=0; i<26; i++)
+	{
+		strcpy(tmp, card[i]);
+		strcpy(card[i], card[52-i-1]);
+		strcpy(card[52-i-1],tmp);
+	}
+	 /*
+	for(i=0; i<52; i++)
+		printf("%s\n", card[i]);
+	   */
+	d = 3;
+	y = 0;
+	start = 25;
+	while(d--)
+	{
+		if(card[start][0] > 60)
+			m = 10;
+		else
+			m = card[start][0] - 48;
+		y += m;
+		total = 10 - m;
+		sol[start]= 0;
+		for(i=start+1, j=0; j<total; i++,j++)
+			sol[i] = 0;
+		start = i;
+	}
+	//printf("%d\n",y);
+	for(i=51; ; i--)
+	{
+		if(sol[i] == 1)
+			y--;
+		if(y == 0)
+		{
+			printf("%s\n",card[i]);
+			break;
+		}
+	}
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

@@ -1,0 +1,100 @@
+From apache@acm.uva.es Wed Feb 16 05:27:09 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1G4R9l05264
+	for <judge@juez.localnet>; Wed, 16 Feb 2005 05:27:09 +0100
+Received: by acm.localnet (Postfix)
+	id A8D1310B2D; Wed, 16 Feb 2005 05:27:09 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id A70A210B27; Wed, 16 Feb 2005 05:27:09 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 10803
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050216042709.A70A210B27@acm.localnet>
+Date: Wed, 16 Feb 2005 05:27:09 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 10803 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.52 - CRC: F2BDDE53 **/
+/** Date: 2005-02-16 05:27:09 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <math.h>
+//#include <conio.h>
+
+#define INF 1e20
+
+double min ( double a, double b )
+{
+	if ( a < b )
+		return a;
+	return b;
+}
+
+int main()
+{
+	int i, j, k, n, t, tc = 1, f;
+	double loc[101][2], cost[101][101], m;
+
+//	freopen( "a.in", "r", stdin ); clrscr();
+	scanf( "%d", &t );
+	while ( t-- )
+	{
+	scanf( "%d", &n );
+	for ( i = 0; i < n; ++i )
+		scanf ( "%lf %lf", &loc[i][0], &loc[i][1] );
+	for ( i = 0; i < n; ++i )
+		for ( j = 0; j < n; ++j )
+		{
+			if ( i == j )
+				m = 0;
+			else
+			{
+				m = sqrt( ( loc[i][0] - loc[j][0] ) * ( loc[i][0] - loc[j][0] )
+				  + ( loc[i][1] - loc[j][1] ) * ( loc[i][1] - loc[j][1] ) );
+				if ( m > 10 )
+					m = INF;
+			}
+			cost[i][j] = m;
+		}
+/*	for (i = 0; i < n; ++i )
+	{
+		for ( j = 0; j < n ; ++j )
+			printf( "%lf  ", cost[i][j] );
+		printf( "\n" );
+	}
+	printf( "\n\n" );
+*///    Floyd - warshall
+	for ( k = 0; k < n; ++k )
+		for ( i = 0; i < n; ++i )
+			for ( j = 0; j < n; ++j )
+				cost[i][j] = min ( cost[i][j], cost[i][k] + cost[k][j] );
+
+	for (i = m = 0, f = 1; i < n && f; ++i )
+	{
+		for ( j = 0; j < n ; ++j )
+		{
+//			printf( "%lf ", cost[i][j] );
+			if ( cost[i][j] == INF )
+			{
+				f = 0;
+				break;
+			}
+			if ( cost[i][j] > m )
+				m = cost[i][j];
+		}
+//		printf( "\n" );
+	}
+	printf( "Case #%d:\n", tc++ );
+	if ( f )
+		printf( "%.4lf\n", m );
+	else
+		printf( "Send Kurdy\n" );
+	printf( "\n" );
+	}
+
+	return 0;
+}
+@END_OF_SOURCE_CODE

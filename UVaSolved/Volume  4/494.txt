@@ -1,0 +1,38 @@
+From apache@acm.uva.es Fri Oct 17 16:08:09 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h9HE89V00916
+	for <judge@juez.localnet>; Fri, 17 Oct 2003 16:08:09 +0200
+Received: by acm.localnet (Postfix)
+	id ADB02FF88; Fri, 17 Oct 2003 16:08:09 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id A27C3FF8B; Fri, 17 Oct 2003 16:08:09 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 494
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031017140809.A27C3FF8B@acm.localnet>
+Date: Fri, 17 Oct 2003 16:08:09 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 494 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.85 - CRC: A592ABA9 **/
+/** Date: 2003-10-17 16:08:09 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<ctype.h>
+int main(){
+	char a[3000],b;
+	int i,j;
+	while(gets(a)&&a[0]!=EOF){
+	for(i=1,j=0;a[i];i++){
+		b=toupper(a[i]);
+		if(b>64 && b<91 && (toupper(a[i-1])<65||toupper(a[i-1])>90))   j++;
+		}
+	if(toupper(a[0])>64&&toupper(a[0])<91) j++;
+	printf("%d\n",j);
+	}
+	return 0;
+	}
+@END_OF_SOURCE_CODE

@@ -1,0 +1,74 @@
+From apache@acm.uva.es Mon Dec  1 05:32:58 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id hB14WvW18524
+	for <judge@juez.localnet>; Mon, 1 Dec 2003 05:32:57 +0100
+Received: by acm.localnet (Postfix)
+	id BF05AFF91; Mon,  1 Dec 2003 05:32:56 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id BD0AFFF92; Mon,  1 Dec 2003 05:32:56 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 444
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20031201043256.BD0AFFF92@acm.localnet>
+Date: Mon,  1 Dec 2003 05:32:56 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 444 C "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 172.16.29.251 - CRC: 7A17650A **/
+/** Date: 2003-12-01 05:32:56 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+
+int main(){
+	register char a[10000];
+   register int i,j,k,c,b[10000];
+
+   while(gets(a))
+   {
+   	if(a[0]<65)
+      {
+         k = strlen(a)-1;
+      	for(i=k,c=0; i>-1; )
+         {
+         		if(a[i]!='1')
+               {
+               	j = (a[i]-48)*10 + a[i-1]-48;
+                  i = i-2;
+                  b[c++] = j;
+               }
+               else
+               {
+               	j =  (a[i]-48)*100 + (a[i-1]-48)*10 + a[i-2]-48;
+                  i = i-3;
+                  b[c++] = j;
+               }
+
+         }
+         for(i=0;i<c;i++)
+         	printf("%c",b[i]);
+      }
+
+      else
+      {
+         k = strlen(a)-1;
+         for(i=k; i>-1; i--)
+         {
+         		j = a[i];
+               while(j)
+               {
+         				printf("%d",j%10);
+                     j/=10;
+               }
+         }
+      }
+      printf("\n");
+   }
+   return 0;
+}
+
+
+@END_OF_SOURCE_CODE

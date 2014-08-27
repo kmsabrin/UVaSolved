@@ -1,0 +1,167 @@
+From apache@acm.uva.es Wed Sep 22 17:40:20 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i8MFeKW24362
+	for <judge@juez.localnet>; Wed, 22 Sep 2004 17:40:20 +0200
+Received: by acm.localnet (Postfix)
+	id EB89710F6C; Wed, 22 Sep 2004 17:40:19 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id E225310F5A; Wed, 22 Sep 2004 17:40:19 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 10592
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040922154019.E225310F5A@acm.localnet>
+Date: Wed, 22 Sep 2004 17:40:19 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 10592 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.65 - CRC: A7AF5FFF **/
+/** Date: 2004-09-22 17:40:19 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+//#include<conio.h>
+#include<string.h>
+
+char battle[51][51], tmp1[51][51], tmp2[51][51];
+int ff, ef, f2f, n;
+
+void f1( int i, int j )
+{
+	int z;
+	z = battle[i][j];
+	if( z == '*' || z == 'B' || z == 'P')
+	{
+		tmp1[i][j] = tmp2[i][j] = z;
+		battle[i][j] = 0;
+		if( i - 1 > - 1 )
+			f1( i - 1, j );
+		if( i + 1 < n )
+			f1( i + 1, j );
+		if( j - 1 > - 1 )
+			f1( i, j - 1 );
+		if( j + 1 < n )
+			f1( i, j + 1 );
+	}
+}
+
+void f2( int i, int j, char k)
+{
+	if( tmp1[i][j] == k )
+	{
+		tmp1[i][j] = 0;
+		if( i - 1 > -1 )
+			f2( i - 1, j , k );
+		if( i + 1 < n )
+			f2( i + 1, j , k );
+		if( j - 1 > -1 )
+			f2( i, j - 1 , k );
+		if( j + 1 < n )
+			f2( i, j + 1 , k );
+	}
+}
+
+void f4( int i, int j, char k)
+{
+	if( tmp2[i][j] == k )
+	{
+		tmp2[i][j] = 0;
+		if( i - 1 > -1 )
+			f4( i - 1, j , k );
+		if( i + 1 < n )
+			f4( i + 1, j , k );
+		if( j - 1 > -1 )
+			f4( i, j - 1 , k );
+		if( j + 1 < n )
+			f4( i, j + 1 , k );
+	}
+}
+
+int f3( int i, int j, char k)
+{
+		if( i - 1 > -1  && tmp2[i - 1][j] == k )
+		{
+			f4( i - 1, j, k );
+			return 1;
+		}
+		if( j - 1 > -1  && tmp2[i][j - 1] == k )
+		{
+			f4( i, j - 1, k );
+			return 1;
+		}
+		if( i + 1 < n  && tmp2[i + 1][j] == k )
+		{
+			f4( i + 1, j, k );
+			return 1;
+		}
+		if( j + 1 < n  && tmp2[i][j + 1] == k )
+		{
+			f4( i, j + 1, k );
+			return 1;
+		}
+		return 0;
+}
+
+int main()
+{
+	int i, j, k, sector;
+	int x, y, z;
+//	clrscr();
+//	freopen("a.in", "r", stdin);
+//	freopen("b.in", "w", stdout);
+
+	while(scanf("%d", &n) && n)
+	{
+//	getchar();
+	for(i = 0; i < n; ++i)
+		scanf("%s", &battle[i]);
+
+	sector = f2f = 0;
+	for( i = 0; i < n; ++i )
+		for( j = 0; j < n; ++j )
+		{
+			z = battle[i][j];
+			memset( tmp1, 0, 50 * 50);
+			memset( tmp2, 0, 50 * 50);
+			if( z == '*' || z == 'B' || z == 'P' )
+			{
+				sector++;
+				ff = ef = 0;
+				f1( i, j );
+				for( x = 0; x < n; ++x )
+					for( y = 0; y < n; ++y )
+					{
+						if( tmp1[x][y] == 'B')
+						{
+							ff++;
+							f2( x, y, 'B' );
+						}
+						if( tmp1[x][y] == 'P')
+						{
+							ef++;
+							f2( x, y, 'P' );
+						}
+					}
+				for( x = 0; x < n; ++x )
+					for( y = 0; y < n; ++y )
+					{
+						if( tmp2[x][y] == 'B' && f3( x, y, 'P'))
+						{
+							f2f += 2;
+							f4( x, y, 'B' );
+						}
+						if( tmp2[x][y] == 'P' && f3( x, y, 'B'))
+						{
+							f2f += 2;
+							f4( x, y, 'P' );
+						}
+					}
+			printf("Sector #%d: contain %d freedom fighter group(s) & %d enemy group(s)\n", sector, ff, ef);
+			}
+		}
+	printf("Total %d group(s) are in fighting position.\n\n", f2f);
+	}
+	return 0;
+}
+@END_OF_SOURCE_CODE

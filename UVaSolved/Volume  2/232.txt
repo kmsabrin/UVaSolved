@@ -1,0 +1,138 @@
+From apache@acm.uva.es Sat Mar 27 13:54:48 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id i2RCsmW11189
+	for <judge@juez.localnet>; Sat, 27 Mar 2004 13:54:48 +0100
+Received: by acm.localnet (Postfix)
+	id 887EC109EC; Sat, 27 Mar 2004 13:54:48 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 86321109EB; Sat, 27 Mar 2004 13:54:48 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 232
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20040327125448.86321109EB@acm.localnet>
+Date: Sat, 27 Mar 2004 13:54:48 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 232 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.102 - CRC: 91D56AA9 **/
+/** Date: 2004-03-27 13:54:48 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+
+int main()
+{
+	char a[11][11];
+	int p[11][11];
+	int r, c;
+	int i, j, k, t, l, f;
+
+	l = 1;
+	f = 0;
+	while(1)
+	{
+	scanf("%d", &r);
+	if(r == 0)
+		break;
+	scanf("%d", &c);
+
+	for(i=0; i<r; i++)
+		scanf("%s", a[i]);
+
+	for(i=0; i<r; i++)
+		for(j=0; j<c; j++)
+			p[i][j] = 0;
+	t = 1;
+	for(i=0; i<r; i++)
+	{
+		for(j=0; j<c; j++)
+		{
+			if(a[i][j] != '*' && j == 0)
+				p[i][j] = t++;
+			if(a[i][j] != '*' && j != 0 && a[i][j-1] == '*')
+				p[i][j] = t++;
+			if(a[i][j] != '*' && i == 0 && p[i][j] == 0)
+				p[i][j] = t++;
+			if(a[i][j] != '*' && i != 0 && a[i-1][j] == '*' && p[i][j] == 0)
+				p[i][j] = t++;
+		}
+	}
+
+	if(f == 1)
+		printf("\n");
+	if(f == 0)
+		f = 1;
+	printf("puzzle #%d:\n",l);
+	l++;
+	printf("Across\n");
+	for(i=0; i<r; i++)
+	{
+		for(j=0; j<c; j++)
+		{
+			if(p[i][j])
+			{
+				if(j==0)
+				{
+					printf("%3d.",p[i][j]);
+					k=j;
+					while(a[i][k] != '*' && k<c)
+					{
+						printf("%c",a[i][k]);
+						k++;
+					}
+					printf("\n");
+				}
+				else if(a[i][j-1] == '*')
+				{
+					printf("%3d.",p[i][j]);
+					k=j;
+					while(a[i][k] != '*' && k<c)
+					{
+						printf("%c",a[i][k]);
+						k++;
+					}
+					printf("\n");
+				}
+			}
+		}
+	}
+
+	printf("Down\n");
+	for(i=0; i<r; i++)
+	{
+		for(j=0; j<c; j++)
+		{
+			if(p[i][j])
+			{
+				if(i==0)
+				{
+					printf("%3d.",p[i][j]);
+					k=i;
+					while(a[k][j] != '*' && k<r)
+					{
+						printf("%c",a[k][j]);
+						k++;
+					}
+					printf("\n");
+				}
+				else if(a[i-1][j] == '*')
+				{
+					printf("%3d.",p[i][j]);
+					k=i;
+					while(a[k][j] != '*' && k<r)
+					{
+						printf("%c",a[k][j]);
+						k++;
+					}
+					printf("\n");
+				}
+			}
+		}
+	}
+	}
+	return 0;
+}
+
+@END_OF_SOURCE_CODE

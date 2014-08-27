@@ -1,0 +1,53 @@
+From apache@acm.uva.es Fri Aug 15 19:06:11 2003
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id h7FH6AV19793
+	for <judge@juez.localnet>; Fri, 15 Aug 2003 19:06:11 +0200
+Received: by acm.localnet (Postfix)
+	id E88ECFF69; Fri, 15 Aug 2003 19:06:10 +0200 (CEST)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id E6A6CFF6D; Fri, 15 Aug 2003 19:06:10 +0200 (CEST)
+To: judge@acm.uva.es
+Subject: Problem 299
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20030815170610.E6A6CFF6D@acm.localnet>
+Date: Fri, 15 Aug 2003 19:06:10 +0200 (CEST)
+
+/* @JUDGE_ID: 34556CP 299 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.22.204.48 - CRC: DA7B4862 **/
+/** Date: 2003-08-15 19:06:10 +0200 **/
+
+@BEGIN_OF_SOURCE_CODE
+/* @JUDGE _ID   299   C++ */
+
+#include<stdio.h>
+int main(void){
+ unsigned long item[55];
+ int i,j,d,a,b,k,t,c[55];
+
+ scanf("%d",&i);
+ for(j=0;j<i;j++){
+	k=0;
+	scanf("%d",&d);
+	for(a=0;a<d;a++)
+		scanf("%lu",&item[a]);
+
+	for(a=1;a<d;a++)
+		for(b=d-1;b>=a;b--){
+			if(item[b-1]>item[b]){
+				t=item[b-1];
+				item[b-1]=item[b];
+				item[b]=t;
+				k++;
+				}
+			}
+	c[j]=k;
+	}
+ for(j=0;j<i;j++)
+ printf("Optimal train swapping takes %d swaps.\n",c[j]);
+
+ return 0;
+}
+@END_OF_SOURCE_CODE

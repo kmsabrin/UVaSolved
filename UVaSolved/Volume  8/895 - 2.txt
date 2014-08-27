@@ -1,0 +1,67 @@
+From apache@acm.uva.es Thu Nov  4 19:28:49 2004
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id iA4ISkd12416
+	for <judge@juez.localnet>; Thu, 4 Nov 2004 19:28:46 +0100
+Received: by acm.localnet (Postfix)
+	id 1967210433; Thu,  4 Nov 2004 19:28:46 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 17AAFFF2B; Thu,  4 Nov 2004 19:28:46 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 895
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20041104182846.17AAFFF2B@acm.localnet>
+Date: Thu,  4 Nov 2004 19:28:46 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 895 C++ "Submitted by Cd-Man's automatic submission tool ver 0.9" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.48 - CRC: 2FE05FC0 **/
+/** Date: 2004-11-04 19:28:46 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+	char word[1000][26];
+	char str[26], inp[1000];
+	int i, j, k, f, a;
+
+	memset( word, 0, 1000 * 26 );
+	j = 0;
+	while ( gets( inp ) )
+	{
+		if ( inp[0] == '#' )
+			break;
+		for ( i = 0; inp[i]; ++i )
+			word[j][inp[i] - 97]++;
+		++j;
+	}
+
+	while ( gets( inp ) )
+	{
+		if ( inp[0] == '#' )
+			break;
+		memset( str, 0, 26 );
+		for ( i = 0; inp[i]; i += 2 )
+			str[inp[i] - 97]++;
+		for ( i = k = 0; i < j; ++i )
+		{
+			f = 1;
+			for ( a = 0; a < 26; ++a )
+				if ( word[i][a] )
+					if ( word[i][a] > str[a] )
+					{
+						f = 0; break;
+					}
+			if ( f )
+				k++;
+		}
+		printf( "%d\n", k );
+	}
+
+	return 0;
+}
+@END_OF_SOURCE_CODE

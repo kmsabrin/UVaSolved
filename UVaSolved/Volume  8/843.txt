@@ -1,0 +1,201 @@
+From apache@acm.uva.es Tue Feb 22 18:57:57 2005
+Received: from acm.localnet (web.localnet [192.168.10.200])
+	by acm.uva.es (8.11.6/8.11.6) with ESMTP id j1MHvvl08081
+	for <judge@juez.localnet>; Tue, 22 Feb 2005 18:57:57 +0100
+Received: by acm.localnet (Postfix)
+	id 4713C112E6; Tue, 22 Feb 2005 18:57:57 +0100 (CET)
+Delivered-To: judge@acm.uva.es
+Received: by acm.localnet (Postfix, from userid 81)
+	id 43786112E5; Tue, 22 Feb 2005 18:57:57 +0100 (CET)
+To: judge@acm.uva.es
+Subject: Problem 843
+From: nobody@nobody.acm.uva.es
+Reply-To: nobody@nobody.acm.uva.es
+Message-Id: <20050222175757.43786112E5@acm.localnet>
+Date: Tue, 22 Feb 2005 18:57:57 +0100 (CET)
+
+/* @JUDGE_ID: 34556CP 843 C++ "" */
+/** Submited via Valladolid ACM Online Judge Submit page v6.00 **/
+/** IP: 202.80.160.49 - CRC: 86C5A659 **/
+/** Date: 2005-02-22 18:57:57 +0100 **/
+
+@BEGIN_OF_SOURCE_CODE
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int success, no_of_word, no_of_dict;
+char used[2020], replaced[250], str[1100], used_char[250];
+char dict[1020][50], word[110][50];
+
+
+int comp( const void *a, const void *b)
+{
+   return( strcmp((char *)a,(char *)b) );
+}
+
+
+int call( int index )
+{
+	int i, j, k, flg;
+	char tmp[50];
+
+	// SUCCESS CONDITION
+	if ( index == no_of_word )
+	{
+		success = 1;
+		for ( i = 0; str[i]; ++i )
+		{
+			if ( str[i] != ' ' )
+				printf( "%c", replaced[str[i]] );
+			else
+				printf( " " );
+		}
+		printf( "\n" );
+		return 0;
+	}
+
+	// SUCCESSIVE SIMILAR INPUT (WORD)
+	if ( index > 0 )
+		if ( !strcmp( word[index - 1], word[index] ) )
+			call( index + 1 );
+
+	// WORKING WITH INDEX'TH WORD
+	// UPDATING WITH CURRENTLY SET CONDITIONS IN A TEMPORARY VARIABLE
+
+	memset( tmp, -1, sizeof( tmp ) );
+	for ( i = 0; word[index][i]; ++i )
+		if ( replaced[word[index][i]] != -1 )
+			tmp[i] = replaced[word[index][i]];
+
+
+	// FIND SOMEONE IN DICTIONARY SIMILAR TO 'tmp'
+	for ( i = 0; i < no_of_dict; ++i )
+	{
+		if ( strlen( dict[i] ) == strlen( word[index] )
+		&&   !used[i] )
+		{
+
+			flg = 1;
+			for ( j = 0; word[index][j]; ++j )
+			{
+				if ( tmp[j] != -1 )
+				{
+					if ( tmp[j] != dict[i][j] )
+					{
+						flg = 0;
+						break;
+					}
+				}
+				else
+				{
+					if ( used_char[dict[i][j]] )
+					{
+						flg = 0;
+						break;
+					}
+				}
+			}
+			for ( j = 0; dict[i][j] && flg; ++j )
+				for ( k = j + 1; dict[i][k] && flg; ++k )
+					if ( dict[i][j] == dict[i][k] )
+						if ( word[index][j] != word[index][k] )
+							flg = 0;
+/*			for ( j = 0; word[index][j] && flg; ++j )
+				for ( k = j + 1; word[index][k] && flg; ++k )
+					if ( word[index][j] == word[index][k] )
+						if ( dict[i][j] != dict[i][k] )
+							flg = 0;
+*/
+
+			if ( flg ) // FOUND ONE!!!!!!
+			{
+				// UPDATE
+				used[i] = 1;
+				for ( j = 0; dict[i][j]; ++j )
+					if ( tmp[j] == -1 )
+					{
+						replaced[word[index][j]] = dict[i][j];
+						used_char[dict[i][j]] = 1;
+					}
+
+				call( index + 1 );
+
+				// UNDO UPDATE
+				used[i] = 0;
+				for ( j = 0; dict[i][j]; ++j )
+					if ( tmp[j] == -1 )
+					{
+						replaced[word[index][j]] = -1;
+						used_char[dict[i][j]] = 0;
+					}
+			}
+		}
+		if ( success ) return 0;
+	}
+	return 0;
+}
+
+int main()
+{
+	int i;
+	char str_tmp[1100], *p;
+
+//	clrscr();
+//	freopen( "a.in", "r", stdin );
+//	freopen( "a.out", "w", stdout );
+
+	scanf( "%d", &no_of_dict ); getchar();
+	for ( i = 0; i < no_of_dict; ++i )
+		gets( dict[i] );
+
+	while ( gets( str_tmp ) )
+	{
+
+		// BLANKLINE
+		if( ! *str_tmp )
+		{
+			puts( str_tmp );
+			continue;
+		}
+
+		strcpy( str, str_tmp );
+		i = 0;
+		p = strtok( str_tmp, " " );
+		strcpy( word[i++], p );
+		while ( 1 )
+		{
+			p = strtok( NULL, " " );
+			if ( p )
+				strcpy( word[i++], p );
+			else
+				break;
+		}
+		no_of_word = i;
+		qsort( (void *)word, no_of_word, sizeof( word[0] ), comp );
+
+
+		memset( replaced, -1, sizeof( replaced) );
+		memset( used, 0, sizeof( used ) );
+		memset( used_char, 0, sizeof( used_char ) );
+		success = 0;
+		call( 0 );
+		if ( !success )
+		{
+			for ( i = 0; str[i]; ++i )
+			{
+				if ( str[i] != ' ' )
+					printf( "*" );
+				else
+					printf( " " );
+			}
+			printf( "\n" );
+		}
+
+	}
+	return 0;
+}
+
+
+
+@END_OF_SOURCE_CODE
